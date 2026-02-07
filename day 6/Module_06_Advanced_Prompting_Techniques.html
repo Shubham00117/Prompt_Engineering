@@ -892,6 +892,42 @@
             </div>
         </div>
 
+        <!-- Topic 10b: Agent Reliability -->
+        <div class="section" id="topic-10b">
+            <h2>1️⃣0️⃣b Agent Reliability Failure Modes</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Agents fail differently than Chatbots. Knowing the fail states is key to
+                robust design.
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Failure Mode</th>
+                    <th>Cause</th>
+                    <th>Fix</th>
+                </tr>
+                <tr>
+                    <td><strong>Looping / Stuck</strong></td>
+                    <td>Agent repeats same weak step forever.</td>
+                    <td>Limit max_steps (e.g., 5). Force "Ask Human" fallback.</td>
+                </tr>
+                <tr>
+                    <td><strong>Planning Paralysis</strong></td>
+                    <td>Agent makes infinite plans but never executes.</td>
+                    <td>Force "Action" step after X planning steps.</td>
+                </tr>
+                <tr>
+                    <td><strong>Tool Uncertainty</strong></td>
+                    <td>"Should I use Calculator or Python?".</td>
+                    <td>Better tool descriptions. Examples of when to use which tool.</td>
+                </tr>
+                <tr>
+                    <td><strong>Context Overflow</strong></td>
+                    <td>History gets too long for window.</td>
+                    <td>Implement Summary Memory or Key-Fact Extraction pruning.</td>
+                </tr>
+            </table>
+        </div>
+
         <!-- Topic 11: Meta-Prompting -->
         <div class="section" id="topic-11">
             <h2>1️⃣1️⃣ Meta-Prompting</h2>
@@ -1007,6 +1043,30 @@
             <div class="key-concept">
                 <strong>💡 Key Insight:</strong> Be specific about what to look at in images. Say "Look at the error
                 message in red" not just "analyze this". Combine image + clear text question for best results.
+            </div>
+        </div>
+
+        <!-- Topic 12b: Multimodal Reliability -->
+        <div class="section" id="topic-12b">
+            <h2>1️⃣2️⃣b Multimodal Reliability</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Vision models like GPT-4o are powerful but prone to specific errors.
+            </div>
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>⚠️ Vision Grounding Errors</strong>
+                    <br>
+                    Model "sees" objects that aren't there, or miscounts items.
+                    <br>
+                    <em>Fix:</em> Use bounding boxes or grid overlays (Set-of-Mark Prompting).
+                </div>
+                <div class="visual-item">
+                    <strong>😵 Cross-Modal Hallucination</strong>
+                    <br>
+                    Text says "The car is red", Image shows a blue car. Model gets confused.
+                    <br>
+                    <em>Fix:</em> Tell model "Prioritize Image evidence over Text context."
+                </div>
             </div>
         </div>
 

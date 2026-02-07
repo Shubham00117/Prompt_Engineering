@@ -256,6 +256,35 @@ CHAINED:    [P1: Extract] → [P2: Analyze] → [P3: Format] (Reliable)
             </div>
         </div>
 
+        <!-- Topic 2b: Advanced Reasoning Control -->
+        <div class="section" id="topic-2b">
+            <h2>2️⃣b Advanced Reasoning Control</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Reasoning isn't just "step-by-step". It's a spectrum of control.
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Technique</th>
+                    <th>How It Works</th>
+                </tr>
+                <tr>
+                    <td><strong>Program-of-Thought (PoT)</strong></td>
+                    <td>Delegate math to code. Instead of guessing <code>132 * 41</code>, the LLM writes
+                        <code>print(132 * 41)</code> and runs it.</td>
+                </tr>
+                <tr>
+                    <td><strong>Hidden CoT</strong></td>
+                    <td>Hide the messy "thinking" steps from the user. Only show the final answer. (Crucial for clean
+                        UX).</td>
+                </tr>
+                <tr>
+                    <td><strong>Multi-Agent Debate</strong></td>
+                    <td>Have Agent A propose an idea, and Agent B critique it. The conflict forces better reasoning.
+                    </td>
+                </tr>
+            </table>
+        </div>
+
         <!-- Topic 8: RAG -->
         <div class="section" id="topic-8">
             <h2>8️⃣ Retrieval-Augmented Generation (RAG)</h2>
@@ -286,6 +315,37 @@ Question: [User Query]
             </div>
         </div>
 
+        <!-- Topic 8b: Deep RAG Strategies -->
+        <div class="section" id="topic-8b">
+            <h2>8️⃣b Deep RAG Strategies (Beyond Basic Retrieval)</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Simple vector search fails on vague questions. You need smarter retrieval.
+            </div>
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>🔄 Query Rewriting</strong>
+                    <br>
+                    User asks: "How much?" (Vague).
+                    <br>
+                    LLM rewrites to: "What is the pricing of the Pro plan?" (Searchable).
+                </div>
+                <div class="visual-item">
+                    <strong>🔍 Hybrid Search</strong>
+                    <br>
+                    Vector search finds "concepts" (Semantic).
+                    <br>
+                    Keyword search finds "exact matches" (Lexical).
+                    <br>
+                    Combine both (Reciprocal Rank Fusion) for best results.
+                </div>
+            </div>
+            <div class="key-concept">
+                <strong>💡 Hallucination Detection:</strong>
+                For high reliability, break the retrieved context into "claims" and ask a second LLM: "Is this claim
+                supported by the source text?" If no, flag it.
+            </div>
+        </div>
+
         <!-- Topic 11-12: Safety -->
         <div class="section" id="topic-11">
             <h2>1️⃣1️⃣-1️⃣2️⃣ Defensive Design & Safety</h2>
@@ -308,6 +368,29 @@ Question: [User Query]
    ↓
 [FOLLOW SYSTEM RULES ONLY]
                 </pre>
+            </div>
+        </div>
+
+        <!-- Topic 13: Edge Case Handling -->
+        <div class="section" id="topic-13">
+            <h2>1️⃣3️⃣ Edge Case Handling</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Production prompts must handle bad inputs gracefully.
+            </div>
+            <div class="example-box">
+                <h4>🛑 The "I Don't Know" Training</h4>
+                Default LLM: Tries to answer everything (Hallucinates).
+                <br>
+                Trained Prompt: "If the information is not in the context, say 'I do not have that information'. Do not
+                guess."
+            </div>
+            <div class="warning-box">
+                <h4>Handling Malformed Inputs</h4>
+                If a user sends JSON when you expect Text, or Hindi when you expect English:
+                <br>
+                "If the input is not in English, translate it first."
+                <br>
+                "If the input is empty, return a default error JSON."
             </div>
         </div>
 

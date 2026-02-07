@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 07: Automated Prompt Engineering</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #110022 0%, #330044 50%, #550066 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #d1b3ff;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 0 0 20px rgba(209, 179, 255, 0.5);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .section h2 {
+            color: white;
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        .section h3 {
+            color: #8e44ad;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #8e44ad;
+            padding-bottom: 10px;
+        }
+
+        .explanation {
+            background: #f3e5f5;
+            border-left: 5px solid #9c27b0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .example-box {
+            background: #fcf3ff;
+            border: 3px solid #9b59b6;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .example-box h4 {
+            color: #8e44ad;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .key-concept {
+            background: #e1bee7;
+            border-left: 5px solid #ab47bc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.2em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .diagram {
+            background: white;
+            border: 2px solid #9b59b6;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+            font-family: monospace;
+            font-size: 1.1em;
+            line-height: 1.4;
+            overflow-x: auto;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table th {
+            background: #9b59b6;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .table td {
+            padding: 12px 15px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .visual-item {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #9b59b6;
+            text-align: center;
+        }
+
+        .visual-item strong {
+            color: #8e44ad;
+            display: block;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🧩 Module 07: Automated Prompt Engineering</h1>
+
+        <!-- Section 1: Intro -->
+        <div class="section">
+            <h2>1️⃣ Why Automate Prompts?</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Humans are bad at guessing what LLMs want. Algorithms are better.
+                Instead of manual trial-and-error ("A/B Testing"), we use machines to search for the optimal prompt.
+            </div>
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>🧍 Human Approach</strong>
+                    <br>Guess based on intuition.
+                    <br>Slow (Minutes/Hours).
+                    <br>Biased by human language.
+                </div>
+                <div class="visual-item">
+                    <strong>🤖 Automated Approach</strong>
+                    <br>Search based on data.
+                    <br>Fast (Seconds/Minutes).
+                    <br>Optimized for model weights.
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Search Algos -->
+        <div class="section">
+            <h2>2️⃣ Prompt Search Algorithms</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Treat "Prompting" as a math search problem. We want to find the string of
+                text that maximizes the Score on a Golden Dataset.
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Algorithm</th>
+                    <th>How It Works</th>
+                </tr>
+                <tr>
+                    <td><strong>Hill Climbing</strong></td>
+                    <td>Start with a prompt. Make small random changes. If score improves, keep it. Repeat.</td>
+                </tr>
+                <tr>
+                    <td><strong>Gradient-Free</strong></td>
+                    <td>Since we can't calculate gradients on discrete text tokens easily, we use black-box optimization
+                        methods.</td>
+                </tr>
+                <tr>
+                    <td><strong>Genetic Algorithms</strong></td>
+                    <td>Create a "population" of 10 prompts. Breed the best ones (mix their words). Mutate (swap words).
+                        Repeat for 50 generations.</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Section 3: Evolutionary Optimization -->
+        <div class="section">
+            <h2>3️⃣ Evolutionary Prompt Optimization</h2>
+            <div class="diagram">
+                <pre>
+Generation 0: "Solve this math problem." (Score: 40%)
+       ↓ [MUTATION: Add 'Think step by step']
+Generation 1: "Solve this math problem. Think step by step." (Score: 70%)
+       ↓ [MUTATION: Add persona 'You are a Math Professor']
+Generation 2: "You are a Math Professor. Solve this math problem. Think step by step." (Score: 85%)
+                </pre>
+            </div>
+            <div class="key-concept">
+                <strong>💡 OPRO (Optimization by PROmpting):</strong>
+                Google DeepMind's technique where the "Optimizer" is the LLM itself! You tell the LLM: "Here is the old
+                prompt and its score. Write a better one that gets a higher score."
+            </div>
+        </div>
+
+        <!-- Section 4: RL -->
+        <div class="section">
+            <h2>4️⃣ Reinforcement Learning (RL)</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Use a Reward Model to train a "Prefix" (soft prompt) or guide the
+                generation.
+            </div>
+            <div class="example-box">
+                <h4>🚀 Auto-Prompting Pipeline</h4>
+                1. <strong>Generator:</strong> Creates 10 candidate prompts.
+                <br>2. <strong>Evaluator:</strong> Tests them on 50 questions.
+                <br>3. <strong>Updater:</strong> Uses RL to update the Generator to produce better candidates next time.
+            </div>
+        </div>
+
+        <!-- Section 5: Distillation -->
+        <div class="section">
+            <h2>5️⃣ Prompt Distillation</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Taking a huge, complex prompt (Chain-of-Thought) and teaching a smaller
+                model to do the same thing with a shorter prompt.
+            </div>
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>Teacher (GPT-4)</strong>
+                    <br>Prompt: "Think step by step..." (500 tokens).
+                    <br>Output: Correct Answer.
+                </div>
+                <div class="visual-item">
+                    <strong>Student (Llama-3-8B)</strong>
+                    <br>Prompt: "Solve." (10 tokens).
+                    <br>Output: Correct Answer (Learned from Teacher).
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="section">
+            <h2>📚 Quick Summary</h2>
+            <div class="summary-box">
+                Don't guess prompts. Search for them. Automation is the future of prompt engineering.
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

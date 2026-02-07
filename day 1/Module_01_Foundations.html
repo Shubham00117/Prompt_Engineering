@@ -323,6 +323,61 @@ IDs:    [30561, 1632]
             </div>
         </div>
 
+        <!-- Topic 1b: LLM Internals (New) -->
+        <div class="section" id="topic-1b">
+            <h2>1️⃣b Deep Dive: LLM Internals</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Understanding the "Engine Room" helps you write better prompts. It's not
+                magic; it's math.
+            </div>
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>🧮 Embeddings vs Tokens</strong>
+                    <br>
+                    <strong>Tokens</strong> are the inputs (words/parts).
+                    <br>
+                    <strong>Embeddings</strong> are the "meaning" (vectors).
+                    <br>
+                    <em>Analogy:</em> Token = The word "King". Embedding = [0.9 Royal, 0.8 Male, 0.1 Food].
+                </div>
+                <div class="visual-item">
+                    <strong>👀 Attention Mechanism</strong>
+                    <br>
+                    How the model "focuses". When generating the word "bank", it looks back at "river" (nature) or
+                    "money" (finance) to decide context.
+                </div>
+            </div>
+            <div class="key-concept">
+                <strong>💡 Positional Encoding:</strong>
+                LLMs don't read left-to-right like humans. They see all tokens at once. "Positional Encodings" tell them
+                that "Dog bites Man" is different from "Man bites Dog".
+                <br><em>Prompt Tip:</em> Ordering matters! Put key instructions at the <strong>start</strong> or
+                <strong>end</strong> (recency bias) because attention is highest there.
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Training Stage</th>
+                    <th>What Happens</th>
+                    <th>Impact on Prompting</th>
+                </tr>
+                <tr>
+                    <td><strong>Pre-Training</strong></td>
+                    <td>Learns grammar & facts from internet.</td>
+                    <td>Base knowledge (Wikipedia, Code).</td>
+                </tr>
+                <tr>
+                    <td><strong>Instruction Tuning</strong></td>
+                    <td>Learns to follow commands ("Summarize this").</td>
+                    <td>Why "Chat" models follow orders better than base models.</td>
+                </tr>
+                <tr>
+                    <td><strong>RLHF</strong></td>
+                    <td>Humans rank answers (Good/Bad).</td>
+                    <td>Why models refuse "harmful" prompts (Safety).</td>
+                </tr>
+            </table>
+        </div>
+
         <!-- Topic 3: Context Windows -->
         <div class="section" id="topic-3">
             <h2>3️⃣ Context Windows (2026 Standards)</h2>
@@ -386,6 +441,41 @@ IDs:    [30561, 1632]
                 <strong>💡 Key Insight:</strong> For production automation (SDET), always use <strong>Temp 0</strong> to
                 ensure stable, reproducible test results.
             </div>
+        </div>
+
+        <!-- Topic 4b: Advanced Parameters -->
+        <div class="section" id="topic-4b">
+            <h2>4️⃣b Advanced Sampling Controls</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Beyond Temperature, these leverage the probability distribution directly.
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Parameter</th>
+                    <th>Function</th>
+                    <th>Use Case</th>
+                </tr>
+                <tr>
+                    <td><strong>Top-k</strong></td>
+                    <td>Cuts off the "tail" of unlikely words. "Only look at the top 50 choices."</td>
+                    <td>Preventing complete nonsense in low-confidence topics.</td>
+                </tr>
+                <tr>
+                    <td><strong>Logit Bias</strong></td>
+                    <td>Manually +/- the probability of specific tokens.</td>
+                    <td>Forcing the model to say "Yes" or banning the word "Happy".</td>
+                </tr>
+                <tr>
+                    <td><strong>Stop Sequences</strong></td>
+                    <td>Strings that force the model to stop generating immediately.</td>
+                    <td>Stopping a chat bot when it tries to write "User:".</td>
+                </tr>
+                <tr>
+                    <td><strong>Seed</strong></td>
+                    <td>Forces deterministic output (like random.seed in Python).</td>
+                    <td>Unit testing prompts to ensure 100% consistent results.</td>
+                </tr>
+            </table>
         </div>
 
         <!-- Topic 5-8: Mindset & Techniques -->

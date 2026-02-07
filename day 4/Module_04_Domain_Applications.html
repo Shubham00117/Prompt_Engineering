@@ -188,6 +188,36 @@ PROVIDE:
             </div>
         </div>
 
+        <!-- Section 11: Code -->
+        <div class="section" id="topic-11">
+            <h2>1️⃣1️⃣ Pro Coding & Debugging</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> "Write code" is a beginner prompt. Professional coding requires specifying
+                the stack, testing, and patterns.
+            </div>
+            <div class="grid-2">
+                <div class="example-box">
+                    <h4>🛠️ Generation Prompt</h4>
+                    "Generate a Python FastAPI endpoint for user login.
+                    <br>- Use Pydantic v2 models.
+                    <br>- Implement rate limiting (Redis).
+                    <br>- Include docstrings (Google style)."
+                </div>
+                <div class="example-box">
+                    <h4>🐞 Debugging Prompt</h4>
+                    "Here is a traceback &lt;log&gt;...&lt;/log&gt;.
+                    <br>- Identify the root cause.
+                    <br>- Propose 3 potential fixes.
+                    <br>- Rate them by 'Impact Risk'."
+                </div>
+            </div>
+            <div class="key-concept">
+                <strong>💡 Unit Test Generation:</strong>
+                "For the code above, generate 5 Pytest cases covering: 1. Happy path, 2. Null input, 3. SQL Injection
+                attempt, 4. Timeout."
+            </div>
+        </div>
+
         <!-- Section 5: Marketing -->
         <div class="section">
             <h2>5️⃣-7️⃣ Marketing & The PAS Framework</h2>
@@ -208,6 +238,59 @@ SOLUTION: "Our CI/CD tool deploys in seconds. Guaranteed."
                 <strong>💡 Key Insight:</strong> For Social Media (Twitter/X vs LinkedIn), don't just "rewrite." Tell
                 the AI to change the **Angle** and **Length** (e.g., "Punchy for X, Insightful for LinkedIn").
             </div>
+        </div>
+
+        <!-- Section 14: Data Extraction -->
+        <div class="section" id="topic-14">
+            <h2>1️⃣4️⃣ Data Extraction & Cleaning</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Converting unstructured text (emails, PDFs) into structured data (JSON/SQL).
+            </div>
+            <div class="diagram">
+                <pre>
+INPUT: "Meeting with Sarah on Friday at 2pm regarding Q4 budget."
+   ↓
+EXTRACTION PROMPT: "Extract entities: Person, Time, Topic."
+   ↓
+OUTPUT:
+{
+  "person": "Sarah",
+  "time": "Friday 2pm",
+  "topic": "Q4 budget"
+}
+                </pre>
+            </div>
+            <div class="warning-box">
+                <h4>Sentiment Analysis</h4>
+                Don't just ask "Is this positive?". Ask for "Sentiment Score (-1 to +1) and Key Drivers".
+            </div>
+        </div>
+
+        <!-- Section 15: Structured Knowledge -->
+        <div class="section" id="topic-15">
+            <h2>1️⃣5️⃣ Structured Knowledge Work</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Automating high-value white-collar tasks like report generation and
+                knowledge graphs.
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Task</th>
+                    <th>Strategy</th>
+                </tr>
+                <tr>
+                    <td><strong>Knowledge Graphs</strong></td>
+                    <td>"Extract all relationships: (Entity A) -> [Relation] -> (Entity B)."</td>
+                </tr>
+                <tr>
+                    <td><strong>Long-Doc QA</strong></td>
+                    <td>"Answer based ONLY on the provided PDF. Cite page numbers."</td>
+                </tr>
+                <tr>
+                    <td><strong>Reports</strong></td>
+                    <td>"Synthesize these 5 memos into a 1-page Executive Summary. Highlight risks."</td>
+                </tr>
+            </table>
         </div>
 
         <!-- Section 12: Customer Service -->
@@ -250,6 +333,33 @@ SOLUTION: "Our CI/CD tool deploys in seconds. Guaranteed."
                 <strong>💡 Localization vs. Translation</strong><br>
                 LLMs excel at Localization: adapting text to cultural norms. Don't just ask to "Translate to Spanish";
                 ask to "Rewrite this for a technical audience in Mexico City" to capture regional slang and tone.
+            </div>
+        </div>
+
+        <!-- Section 16: Human-AI Interaction -->
+        <div class="section" id="topic-16">
+            <h2>1️⃣6️⃣ Advanced Human-AI Interaction</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Making AI feel like a partner, not a tool.
+            </div>
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>🧠 Memory Design</strong>
+                    <br>
+                    <strong>Short-Term:</strong> "What did I just say?"
+                    <br>
+                    <strong>Long-Term:</strong> "Remember I prefer Python." (Store this in a vector DB/User Profile).
+                </div>
+                <div class="visual-item">
+                    <strong>🎭 Personalization</strong>
+                    <br>
+                    "Adapt your tone to the user. If they are brief, be brief. If they are chatty, match their energy."
+                </div>
+            </div>
+            <div class="key-concept">
+                <strong>💡 Tone Alignment:</strong>
+                Track the user's emotion. If they are angry, switch to "Empathetic/Professional". If they are happy,
+                switch to "Casual/Enthusiastic".
             </div>
         </div>
 

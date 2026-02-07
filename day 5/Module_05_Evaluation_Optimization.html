@@ -210,6 +210,35 @@
             </table>
         </div>
 
+        <!-- Section 2b: Evaluation Science -->
+        <div class="section" id="topic-2b">
+            <h2>2️⃣b Evaluation Science (Deep Dive)</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Moving from "Vibes-based" evaluation to "Stats-based" evaluation.
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Method</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><strong>Pairwise Ranking</strong></td>
+                    <td>Show two outputs to a human/LLM. "Which is better? A or B?". Elo ratings (like Chess) are more
+                        accurate than absolute 1-5 scores.</td>
+                </tr>
+                <tr>
+                    <td><strong>LLM-as-Judge</strong></td>
+                    <td>Using GPT-4 to grade Llama-3 responses. Fast, cheap, consistent. Must be calibrated against
+                        human labels.</td>
+                </tr>
+                <tr>
+                    <td><strong>Regression Testing</strong></td>
+                    <td>"New prompt must pass all 50 previous bug cases." Do not break old fixes while adding new
+                        features.</td>
+                </tr>
+            </table>
+        </div>
+
         <!-- Section 4: A/B Testing -->
         <div class="section">
             <h2>4️⃣-5️⃣ A/B Testing & Analysis</h2>
@@ -233,6 +262,39 @@ WINNER: Prompt B (+13.2% Improvement)
             <div class="visual-item">
                 <strong>🚀 Pro Tools:</strong> Use frameworks like <strong>Promptfoo</strong> (CLI-based evals) or
                 <strong>LangSmith</strong> (Traceability and Evals) to automate this cycle in production.
+            </div>
+        </div>
+
+        <!-- Section 9b: Production Reliability -->
+        <div class="section" id="topic-9b">
+            <h2>9️⃣b Production Reliability</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Prompts rot over time. Model updates, data drift, and user behavior changes
+                require monitoring.
+            </div>
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>📉 Drift Detection</strong>
+                    <br>
+                    Is the model refusing answer more often?
+                    <br>
+                    Is the output length shrinking?
+                    <br>
+                    <em>Monitor statistics daily.</em>
+                </div>
+                <div class="visual-item">
+                    <strong>🔄 Fallback Strategies</strong>
+                    <br>
+                    Primary (GPT-4) fails/times out?
+                    <br>
+                    -> Fallback to Backup (Claude 3.5).
+                    <br>
+                    -> Fallback to Error Message.
+                </div>
+            </div>
+            <div class="warning-box">
+                <h4>Safety Monitoring</h4>
+                Track "Refusal Rate". If it spikes, your prompt might be triggering new safety filters in the model API.
             </div>
         </div>
 

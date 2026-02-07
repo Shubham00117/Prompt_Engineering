@@ -329,6 +329,37 @@ Provide sentiment analysis in JSON format.
             </div>
         </div>
 
+        <!-- Topic 2b: Prompt Design Theory (New) -->
+        <div class="section" id="topic-2b">
+            <h2>2️⃣b Prompt Design Theory</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Prompting is software engineering. Apply design patterns to your
+                instructions.
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Concept</th>
+                    <th>Explanation</th>
+                </tr>
+                <tr>
+                    <td><strong>Instruction Hierarchy</strong></td>
+                    <td>Primary Goal > Constraints > Format. Structure prompts so the "Main Mission" is never lost in
+                        the details.</td>
+                </tr>
+                <tr>
+                    <td><strong>Minimalism vs Redundancy</strong></td>
+                    <td><strong>Minimalism:</strong> Less confusion, lower cost (Models like Claude prefer
+                        this).<br><strong>Redundancy:</strong> Repeating key constraints at the end (Recency Bias) helps
+                        forgetful models (older GPTs).</td>
+                </tr>
+                <tr>
+                    <td><strong>Negative Prompting</strong></td>
+                    <td>"Do NOT do X". Use sparingly. Models struggle with negation. Better to say "Keep sentences
+                        short" than "Do not write long sentences".</td>
+                </tr>
+            </table>
+        </div>
+
         <!-- Topic 3: Role-Based Prompting -->
         <div class="section" id="topic-3">
             <h2>3️⃣ Role-Based Prompting (Personas)</h2>
@@ -426,6 +457,48 @@ Output Format:
             <div class="key-concept">
                 <strong>💡 Key Insight:</strong> Use "Few-Shot" when the model keeps making the same formatting error.
                 Examples act as "guardrails."
+            </div>
+        </div>
+
+        <!-- Topic 7b: Advanced Few-Shot Science -->
+        <div class="section" id="topic-7b">
+            <h2>7️⃣b Advanced Few-Shot Science</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> The quality and order of your examples matter more than the quantity.
+            </div>
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>🔀 Formatting vs Reasoning</strong>
+                    <br>
+                    Examples teach <strong>Format</strong> easily (JSON, CSV).
+                    <br>
+                    Examples teach <strong>Reasoning</strong> poorly unless you use CoT in the example itself.
+                </div>
+                <div class="visual-item">
+                    <strong>⚠️ Demonstration Leakage</strong>
+                    <br>
+                    If all your examples are about "Sports", the model might think the task is <em>only</em> about
+                    sports, even if you ask about Finance. Keep examples diverse!
+                </div>
+            </div>
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>📉 Example Ordering</strong>
+                    <br>
+                    The <em>last</em> example has the most impact (Recency Bias). If the model consistently fails, try
+                    moving the hardest example to the end.
+                </div>
+                <div class="visual-item">
+                    <strong>🤖 Synthetic Examples</strong>
+                    <br>
+                    Don't have data? Use a strong model (GPT-4) to generate 50 diverse examples, then use them as
+                    few-shot demonstrations for a cheaper model.
+                </div>
+            </div>
+            <div class="key-concept">
+                <strong>💡 Selection Strategy: K-Nearest Neighbors (KNN)</strong>
+                For advanced systems, don't use static examples. Dynamically select the 3 examples from your database
+                that are most similar (semantically) to the user's current question.
             </div>
         </div>
 
