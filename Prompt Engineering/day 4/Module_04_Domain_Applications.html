@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 04: Domain-Specific Applications</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff9a9e;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 0 0 20px rgba(255, 154, 158, 0.5);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .section h2 {
+            color: white;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        .section h3 {
+            color: #f5576c;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #f5576c;
+            padding-bottom: 10px;
+        }
+
+        .explanation {
+            background: #fff8fb;
+            border-left: 5px solid #f5576c;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            line-height: 1.8;
+        }
+
+        .example-box {
+            background: #fdfbff;
+            border: 2px solid #f093fb;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .key-concept {
+            background: #e8eaf6;
+            border-left: 5px solid #3f51b5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table th {
+            background: #f5576c;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .toc {
+            background: #fffafa;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .toc ul {
+            columns: 2;
+            list-style: none;
+        }
+
+        .toc li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .diagram {
+            background: #fafafa;
+            border: 2px dashed #f5576c;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: monospace;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .toc ul {
+                columns: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎨 Module 04: Real-World Domain Applications</h1>
+
+        <!-- Table of Contents -->
+        <div class="section">
+            <h2>📋 Vertical Solutions (Industry specific)</h2>
+            <div class="toc">
+                <ul>
+                    <li>1. Writing Assistance</li>
+                    <li>2. Professional Editing</li>
+                    <li>3. Style Matching</li>
+                    <li>4. Grammar & Proofing</li>
+                    <li>5. Marketing (PAS Framework)</li>
+                    <li>6. Ad Copy Advertising</li>
+                    <li>7. Social Media Variations</li>
+                    <li>8. Creative Fiction</li>
+                    <li>9. Story Plotting Templates</li>
+                    <li>10. Document Summarization</li>
+                    <li>11. Code & Technical Writing</li>
+                    <li>12. Customer Service Queries</li>
+                    <li>13. Brand Voice Monitoring</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 1: Writing -->
+        <div class="section">
+            <h2>1️⃣-4️⃣ Professional Writing & Editing</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Prompting for writing isn't just about generation; it's about context-aware
+                improvement. A professional "Editor" prompt must demand a list of changes and reasoning.
+            </div>
+            <div class="example-box">
+                <h4>PRO EDITOR TEMPLATE:</h4>
+                <pre>
+Act as a professional senior editor. Improve the &lt;original&gt; text.
+&lt;original&gt;[Paste text here]&lt;/original&gt;
+
+CRITERIA:
+- Active voice only.
+- 10th-grade reading level.
+- Remove all corporate jargon.
+
+PROVIDE:
+1. Revised version.
+2. Bulleted list of specific edits made.
+                </pre>
+            </div>
+        </div>
+
+        <!-- Section 5: Marketing -->
+        <div class="section">
+            <h2>5️⃣-7️⃣ Marketing & The PAS Framework</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Higher conversions come from structured psychology. Use the
+                **Problem-Agitation-Solution (PAS)** model for high-impact copy.
+            </div>
+            <div class="diagram">
+                <pre>
+PROBLEM: "Tired of slow builds?"
+   ↓
+AGITATION: "Wasted hours mean lost revenue & missed deadlines."
+   ↓
+SOLUTION: "Our CI/CD tool deploys in seconds. Guaranteed."
+                </pre>
+            </div>
+            <div class="key-concept">
+                <strong>💡 Key Insight:</strong> For Social Media (Twitter/X vs LinkedIn), don't just "rewrite." Tell
+                the AI to change the **Angle** and **Length** (e.g., "Punchy for X, Insightful for LinkedIn").
+            </div>
+        </div>
+
+        <!-- Section 12: Customer Service -->
+        <div class="section">
+            <h2>1️⃣2️⃣-1️⃣3️⃣ Conversational AI & Brand Voice</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Building a brand bot requires a "Personality Matrix" and strict "Escalation
+                Rules."
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Component</th>
+                    <th>Example Configuration</th>
+                </tr>
+                <tr>
+                    <td><strong>ID</strong></td>
+                    <td>"Name: Alex, Role: Support Specialist."</td>
+                </tr>
+                <tr>
+                    <td><strong>Tone</strong></td>
+                    <td>"Friendly, patient, warm, not corporate."</td>
+                </tr>
+                <tr>
+                    <td><strong>Limits</strong></td>
+                    <td>"Never process payments. Redirect to portal."</td>
+                </tr>
+                <tr>
+                    <td><strong>Escalation</strong></td>
+                    <td>"If user mentions legal or supervisor, hand off."</td>
+                </tr>
+            </table>
+            <div class="warning-box">
+                <h4>🛡️ High-Stakes Domains (Legal/Medical)</h4>
+                <strong>Rule:</strong> AI should NEVER provide advice. It provides <em>information</em>.
+                <br><em>Prompt Pattern:</em> "You are a legal researcher assistant. Provide a summary of the law.
+                Include a disclaimer that this is NOT legal advice and the user should consult a human attorney."
+            </div>
+
+            <div class="key-concept">
+                <strong>💡 Localization vs. Translation</strong><br>
+                LLMs excel at Localization: adapting text to cultural norms. Don't just ask to "Translate to Spanish";
+                ask to "Rewrite this for a technical audience in Mexico City" to capture regional slang and tone.
+            </div>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="section">
+            <h2>📚 Quick Reference Summary</h2>
+            <table class="table">
+                <tr>
+                    <th>Domain</th>
+                    <th>Winning Formula</th>
+                </tr>
+                <tr>
+                    <td><strong>Creative</strong></td>
+                    <td>Sensory details + "No 'Once upon a time'."</td>
+                </tr>
+                <tr>
+                    <td><strong>Technical</strong></td>
+                    <td>FastAPI/Pydantic context + PEP 8 rules.</td>
+                </tr>
+                <tr>
+                    <td><strong>Marketing</strong></td>
+                    <td>PAS Framework + AIDA psychological model.</td>
+                </tr>
+                <tr>
+                    <td><strong>Ethics</strong></td>
+                    <td>Transparency, Accuracy, and Privacy filters.</td>
+                </tr>
+            </table>
+            <div class="summary-box">
+                💡 Domain applications transform raw AI into a specialized tool for your specific business niche.
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 05: Evaluation and Optimization</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #243b55 0%, #141e30 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4facfe;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 0 0 20px rgba(79, 172, 254, 0.5);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .section h2 {
+            color: white;
+            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        .section h3 {
+            color: #4facfe;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #4facfe;
+            padding-bottom: 10px;
+        }
+
+        .explanation {
+            background: #e1f5fe;
+            border-left: 5px solid #03a9f4;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            line-height: 1.8;
+        }
+
+        .example-box {
+            background: #f1f8e9;
+            border: 2px solid #4caf50;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .key-concept {
+            background: #fff9c4;
+            border-left: 5px solid #fbc02d;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table th {
+            background: #4facfe;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .toc {
+            background: #f0f4f8;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .toc ul {
+            columns: 2;
+            list-style: none;
+        }
+
+        .toc li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #cfd8dc;
+        }
+
+        .diagram {
+            background: #fff;
+            border: 2px solid #4facfe;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: monospace;
+            text-align: center;
+        }
+
+        .warning-box {
+            background: #ffebee;
+            border-left: 5px solid #f44336;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .toc ul {
+                columns: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🛠️ Module 05: Evaluation and Optimization</h1>
+
+        <!-- Table of Contents -->
+        <div class="section">
+            <h2>📋 Engineering Excellence (Metrics & Tuning)</h2>
+            <div class="toc">
+                <ul>
+                    <li>1. Defining Success Metrics</li>
+                    <li>2. Accuracy vs Relevance</li>
+                    <li>3. Latency & Token Efficiency</li>
+                    <li>4. A/B Testing Prompts</li>
+                    <li>5. Human-in-the-loop Evaluation</li>
+                    <li>6. Model Variability Handling</li>
+                    <li>7. Gold Datasets & Eval Sets</li>
+                    <li>8. Iterative Improvement Cycle</li>
+                    <li>9. Analyzing Failure Modes</li>
+                    <li>10. Hallucination Detection</li>
+                    <li>11. Prompt Versioning (Git style)</li>
+                    <li>12. Cost & Latency Budgets</li>
+                    <li>13. Optimization Decisions</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 1: Metrics -->
+        <div class="section">
+            <h2>1️⃣-3️⃣ Defining Success Metrics</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Before you optimize a prompt, you must define exactly what "Good" looks
+                like. We use **Primary** (critical), **Secondary** (important), and **Tertiary** (nice-to-have) metrics.
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Metric</th>
+                    <th>What it Measures</th>
+                    <th>Target (Example)</th>
+                </tr>
+                <tr>
+                    <td><strong>Accuracy</strong></td>
+                    <td>Correctness of answer.</td>
+                    <td>>95% on Gold Set</td>
+                </tr>
+                <tr>
+                    <td><strong>Consistency</strong></td>
+                    <td>Low variance in output style.</td>
+                    <td>
+                        <10% variance</td>
+                </tr>
+                <tr>
+                    <td><strong>Latency</strong></td>
+                    <td>Time to First Token (TTFT).</td>
+                    <td>
+                        <2.0 seconds</td>
+                </tr>
+                <tr>
+                    <td><strong>Token Eff.</strong></td>
+                    <td>Minimizing billable tokens.</td>
+                    <td>
+                        <500 per response</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Section 4: A/B Testing -->
+        <div class="section">
+            <h2>4️⃣-5️⃣ A/B Testing & Analysis</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Never assume a prompt is better without data. Compare Version A (Control)
+                against Version B (Test) using a statistically significant sample (n=100+).
+            </div>
+            <div class="diagram">
+                <pre>
+[PROMPT A] → Evaluate Quality Score (3.8)
+    vs
+[PROMPT B] → Evaluate Quality Score (4.3)
+   ↓
+WINNER: Prompt B (+13.2% Improvement)
+                </pre>
+            </div>
+            <div class="key-concept">
+                <strong>💡 Key Insight:</strong> Use **LLM-as-a-Judge** (using GPT-4 to score Llama-3 results) for
+                faster, automated A/B testing before human review.
+            </div>
+            <div class="visual-item">
+                <strong>🚀 Pro Tools:</strong> Use frameworks like <strong>Promptfoo</strong> (CLI-based evals) or
+                <strong>LangSmith</strong> (Traceability and Evals) to automate this cycle in production.
+            </div>
+        </div>
+
+        <!-- Section 12: Cost -->
+        <div class="section">
+            <h2>1️⃣2️⃣-1️⃣3️⃣ Cost & Latency Optimization</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> The most expensive model (o1/GPT-4o) isn't always the best Choice.
+                Optimization is about finding the point where **Price meets Performance**.
+            </div>
+            <div class="warning-box">
+                <h4>💸 Optimization Strategy:</h4>
+                • <strong>Small Tasks:</strong> Use GPT-4o-mini or Llama-3-8B. (Cost: $0.15/1M).<br>
+                • <strong>Reasoning Tasks:</strong> Use Claude 3.5 or GPT-o1. (Cost: $15/1M).<br>
+                • <strong>Efficiency Pattern:</strong> Summarize or Compress your prompt history to save money.
+            </div>
+            <div class="warning-box">
+                <h4>🛑 Security Risk: Many-Shot Jailbreaking</h4>
+                Modern models with 100k+ context windows are vulnerable to "Many-Shot" attacks. An attacker provides
+                100+ "safe" examples of bad tasks, fooling the model into bypassing safety filters for the 101st
+                request.
+            </div>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="section">
+            <h2>📚 Quick Reference Summary</h2>
+            <table class="table">
+                <tr>
+                    <th>Step</th>
+                    <th>Action Item</th>
+                </tr>
+                <tr>
+                    <td><strong>Define</strong></td>
+                    <td>Create a 1-5 Quality Rubric for your bot.</td>
+                </tr>
+                <tr>
+                    <td><strong>Dataset</strong></td>
+                    <td>Build a "Gold Set" of 50 perfect Input/Output pairs.</td>
+                </tr>
+                <tr>
+                    <td><strong>Test</strong></td>
+                    <td>Run A/B tests on specific instructions vs. general ones.</td>
+                </tr>
+                <tr>
+                    <td><strong>Optimize</strong></td>
+                    <td>Compress prompts ONLY after you reach 90% accuracy.</td>
+                </tr>
+            </table>
+            <div class="summary-box">
+                💡 Evaluation is what separates a "Prompt Hack" from a "Production Product."
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

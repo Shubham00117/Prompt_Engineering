@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 02: Core Prompting Strategies</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00ffcc;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .section h2 {
+            color: white;
+            background: linear-gradient(135deg, #1d976c 0%, #93f9b9 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        .section h3 {
+            color: #1d976c;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #1d976c;
+            padding-bottom: 10px;
+        }
+
+        .why-matters {
+            background: linear-gradient(135deg, #1d976c15, #93f9b915);
+            border-left: 5px solid #1d976c;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .explanation {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .example-box {
+            background: #f1f8e9;
+            border: 3px solid #1d976c;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .example-box h4 {
+            color: #1b5e20;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .key-concept {
+            background: #f9fbe7;
+            border-left: 5px solid #cddc39;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #1d976c 0%, #93f9b9 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.2em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .diagram {
+            background: #fff;
+            border: 2px solid #1d976c;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+            font-family: monospace;
+            font-size: 1.1em;
+            line-height: 1.4;
+            overflow-x: auto;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table th {
+            background: #1d976c;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .table td {
+            padding: 12px 15px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .visual-item {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #1d976c;
+            text-align: center;
+        }
+
+        .visual-item strong {
+            color: #1d976c;
+            display: block;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border: 3px solid #ff9800;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .warning-box h4 {
+            color: #e65100;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .toc {
+            background: #f1f8e9;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .toc h4 {
+            color: #1b5e20;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .toc ul {
+            columns: 2;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .toc li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .toc li a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .toc li a:hover {
+            color: #1d976c;
+        }
+
+        @media (max-width: 768px) {
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .toc ul {
+                columns: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎯 Module 02: Core Prompting Strategies</h1>
+
+        <!-- Table of Contents -->
+        <div class="section">
+            <h2>📋 Strategy Roadmap (Key Techniques)</h2>
+            <div class="toc">
+                <h4>Quick Navigation</h4>
+                <ul>
+                    <li>1. Using Delimiters</li>
+                    <li>2. Instruction-Content Separation</li>
+                    <li>3. Role-Based Prompting</li>
+                    <li>4. Output Format Specification</li>
+                    <li>5. Zero-Shot Prompting</li>
+                    <li>6. One-Shot Prompting</li>
+                    <li>7. Few-Shot Learning</li>
+                    <li>8. Chain-of-Thought (CoT)</li>
+                    <li>9. Complex Problem Breakdown</li>
+                    <li>10. Self-Verification Prompts</li>
+                    <li>11. Error-Checking Patterns</li>
+                    <li>12. Crafting Good Examples</li>
+                    <li>13. Positive vs Negative Examples</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Topic 1: Using Delimiters -->
+        <div class="section" id="topic-1">
+            <h2>1️⃣ Using Delimiters and Formatting</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Delimiters are special character sequences that act as "borders" in your
+                prompt, separating instructions from content and data.
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Type</th>
+                    <th>Example</th>
+                    <th>Best For</th>
+                </tr>
+                <tr>
+                    <td><strong>XML Tags</strong></td>
+                    <td><code>&lt;context&gt;...&lt;/context&gt;</code></td>
+                    <td>Claude, nested data, high structure</td>
+                </tr>
+                <tr>
+                    <td><strong>Triple Quotes</strong></td>
+                    <td><code>"""..."""</code></td>
+                    <td>Python code, long text blocks</td>
+                </tr>
+                <tr>
+                    <td><strong>Markdown</strong></td>
+                    <td><code># Header, - List</code></td>
+                    <td>GPT models, clear hierarchy</td>
+                </tr>
+                <tr>
+                    <td><strong>Brackets</strong></td>
+                    <td><code>[INSTRUCTION]</code></td>
+                    <td>Internal tool logs, section headers</td>
+                </tr>
+            </table>
+            <div class="example-box">
+                <h4>🚀 Example with XML:</h4>
+                <pre>
+Analyze the customer review below.
+&lt;review&gt;
+The product arrived quickly but the packaging was damaged.
+&lt;/review&gt;
+Provide sentiment analysis in JSON format.
+                </pre>
+            </div>
+        </div>
+
+        <!-- Topic 2: Instruction Separation -->
+        <div class="section" id="topic-2">
+            <h2>2️⃣ Separating Instructions from Content</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Prevent "Prompt Injection" or confusion by explicitly labeling what the AI
+                should DO versus what it should process.
+            </div>
+            <div class="grid-2">
+                <div class="warning-box">
+                    <h4>❌ Mixed Together (Bad)</h4>
+                    "Translate 'The instructions say to press the red button' to Spanish."
+                </div>
+                <div class="example-box">
+                    <h4>✅ Clear Separation (Good)</h4>
+                    "Translate the text in &lt;source&gt; tags to Spanish.<br>
+                    &lt;source&gt;The instructions say to press the red button&lt;/source&gt;"
+                </div>
+            </div>
+        </div>
+
+        <!-- Topic 3: Role-Based Prompting -->
+        <div class="section" id="topic-3">
+            <h2>3️⃣ Role-Based Prompting (Personas)</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Assigning a "Job Title" or "Expertise Level" to the LLM sets the tone, level
+                of detail, and perspective of the response.
+            </div>
+            <div class="diagram">
+                <pre>
+┌─────────────────────────────────┐
+│        LLM WORLD VIEW           │
+├─────────────────────────────────┤
+│ [Default] → Generic, safe text  │
+│ [Expert]  → Technical, precise  │
+│ [Student] → Simple, ELI5 style  │
+└─────────────────────────────────┘
+                </pre>
+            </div>
+            <div class="visual-item">
+                <strong>Detailed Persona Pattern:</strong><br>
+                "You are Dr. Sarah Chen, a renowned nutritionist with 20 years of experience. Your style is warm but
+                evidence-based. Always cite research."
+            </div>
+            <div class="key-concept">
+                <strong>💡 Psychological Hack: Emotional Stimuli</strong><br>
+                Research shows LLMs perform better when the task is framed as high-stakes. Adding "This is very
+                important for my career" or "I really need this to be correct" can improve reasoning benchmarks.
+            </div>
+        </div>
+
+        <!-- Topic 4: Output Format Specification -->
+        <div class="section" id="topic-4">
+            <h2>4️⃣ Output Format Specification</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Don't leave the formatting to chance. Demand a specific structure for
+                programmatic or document use.
+            </div>
+            <div class="grid-3">
+                <div class="visual-item">
+                    <strong>📦 JSON</strong><br>
+                    For code parsers.
+                </div>
+                <div class="visual-item">
+                    <strong>📅 Tables</strong><br>
+                    For comparisons.
+                </div>
+                <div class="visual-item">
+                    <strong>📝 Bullets</strong><br>
+                    For quick reading.
+                </div>
+            </div>
+            <div class="example-box">
+                <h4>Example JSON Request:</h4>
+                <pre>
+Extract: Name, Age, Skill.
+Output Format:
+{
+  "name": "string",
+  "age": number,
+  "skill": "string"
+}
+                </pre>
+            </div>
+        </div>
+
+        <!-- Topic 5-7: Few-Shot Learning -->
+        <div class="section" id="topic-5">
+            <h2>5️⃣-7️⃣ Zero, One, and Few-Shot Learning</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Providing examples inside the prompt to "tune" the model's behavior on the
+                fly.
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Technique</th>
+                    <th>Examples Given</th>
+                    <th>Use Case</th>
+                </tr>
+                <tr>
+                    <td><strong>Zero-Shot</strong></td>
+                    <td>0</td>
+                    <td>Simple, standard tasks (e.g., summarize).</td>
+                </tr>
+                <tr>
+                    <td><strong>One-Shot</strong></td>
+                    <td>1</td>
+                    <td>Setting a specific output format.</td>
+                </tr>
+                <tr>
+                    <td><strong>Few-Shot</strong></td>
+                    <td>3-5</td>
+                    <td>Complex patterns, nuanced classification.</td>
+                </tr>
+            </table>
+            <div class="key-concept">
+                <strong>💡 Key Insight:</strong> Use "Few-Shot" when the model keeps making the same formatting error.
+                Examples act as "guardrails."
+            </div>
+        </div>
+
+        <!-- Topic 8-9: Chain-of-Thought -->
+        <div class="section" id="topic-8">
+            <h2>8️⃣-9️⃣ Chain-of-Thought (CoT) & Reasoning</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Forcing the model to "show its work" before giving the final answer. This
+                dramatically improves accuracy in math and logic.
+            </div>
+            <div class="diagram">
+                <pre>
+PROMPT: "Solve X. Think step-by-step."
+   ↓
+THOUGHT 1: [Identify variables]
+THOUGHT 2: [Apply formula]
+THOUGHT 3: [Verify units]
+   ↓
+FINAL ANSWER: [Precise result]
+                </pre>
+            </div>
+            <div class="why-matters">
+                <strong>Trigger Phrases:</strong><br>
+                • "Let's think step by step."<br>
+                • "Walk through your reasoning process."<br>
+                • "Explain your math before the final result."
+            </div>
+            <div class="key-concept">
+                <strong>💡 Least-to-Most Prompting</strong><br>
+                For very hard logic: Break the problem into sub-problems. Ask the AI to solve the simplest part first,
+                then use that answer to solve the next part. This "progressive solving" reduces errors in complex coding
+                tasks.
+            </div>
+        </div>
+
+        <!-- Topic 10-11: Verification -->
+        <div class="section" id="topic-10">
+            <h2>🔟-1️⃣1️⃣ Self-Verification & Error-Checking</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Build a two-stage process where the model first generates, then audits its
+                own output.
+            </div>
+            <div class="grid-2">
+                <div class="example-box">
+                    <h4>Stage 1: Generate</h4>
+                    "Write a Python function to sort a list."
+                </div>
+                <div class="example-box">
+                    <h4>Stage 2: Audit</h4>
+                    "Now, review the function above for: 1. Division by zero, 2. Empty lists, 3. Input type errors."
+                </div>
+            </div>
+        </div>
+
+        <!-- Topic 12-13: Examples Best Practices -->
+        <div class="section" id="topic-12">
+            <h2>1️⃣2️⃣-1️⃣3️⃣ Effective Example Crafting</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Not all examples are equal. Good examples are diverse, clear, and relevant.
+            </div>
+            <div class="visual-item">
+                <strong>✅ Positive vs Negative Pattern:</strong><br>
+                Show the AI one GOOD example and one BAD example. Explain WHY the bad one failed to help the AI avoid
+                similar mistakes.
+            </div>
+            <div class="key-concept" style="margin-top: 20px;">
+                <strong>Principles of Good Examples:</strong><br>
+                1. <strong>Representative:</strong> Cover typical real-world cases.<br>
+                2. <strong>Diverse:</strong> Don't use 3 examples that are all 90% identical.<br>
+                3. <strong>Clear Labeling:</strong> Use "Input:" and "Output:" markers.
+            </div>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="section">
+            <h2>📚 Quick Reference Summary</h2>
+            <table class="table">
+                <tr>
+                    <th>Technique</th>
+                    <th>One-Line Summary</th>
+                </tr>
+                <tr>
+                    <td><strong>Delimiters</strong></td>
+                    <td>Use &lt;tags&gt; or """ to separate data from logic.</td>
+                </tr>
+                <tr>
+                    <td><strong>Personas</strong></td>
+                    <td>Assign roles (Expert, Teacher) to shift perspective.</td>
+                </tr>
+                <tr>
+                    <td><strong>Few-Shot</strong></td>
+                    <td>Provide 3+ examples to fix stubborn formatting issues.</td>
+                </tr>
+                <tr>
+                    <td><strong>CoT</strong></td>
+                    <td>Always say "Think step-by-step" for complex logic.</td>
+                </tr>
+                <tr>
+                    <td><strong>Self-Verify</strong></td>
+                    <td>Ask the model to double-check its work for bugs.</td>
+                </tr>
+            </table>
+            <div class="summary-box">
+                💡 Core strategies move you from "Chatting" with AI to "Developing" with AI.
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
