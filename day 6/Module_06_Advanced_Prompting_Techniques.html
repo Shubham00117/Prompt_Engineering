@@ -656,62 +656,66 @@
             <h2>7️⃣ Multi-Turn Conversation Design</h2>
 
             <div class="explanation">
-                <strong>Core Idea:</strong> Managing context across multiple conversation turns while staying within
-                token limits.
+                <strong>The "Goldfish" Problem:</strong> LLMs are <strong>stateless</strong>. This means they have no
+                "built-in" memory of past interactions. Each time you send a message, the model starts from scratch,
+                like a person waking up with total amnesia every 5 seconds.
+            </div>
+
+            <div class="grid-2">
+                <div class="topic-card">
+                    <h4>🛠️ The Solution: Context Stuffing</h4>
+                    <p>To simulate "memory," we must resend the <strong>entire conversation history</strong> with every
+                        new message. This provides the LLM with the context it needs to follow the thread.</p>
+                </div>
+                <div class="topic-card" style="border-color: #ff6b6b; background: rgba(255, 107, 107, 0.05);">
+                    <h4>⚠️ The Constraint: Token Limits</h4>
+                    <p>You can't send infinite history. Models have a <strong>Context Window</strong> (e.g., 128k
+                        tokens). More history = Higher cost + Potential for "lost in the middle" accuracy drops.</p>
+                </div>
             </div>
 
             <div class="diagram">
-                <pre>
-┌─────────────────────────────────────────────────────────┐
-│            Message History Structure                     │
-├─────────────────────────────────────────────────────────┤
-│                                                         │
-│   messages = [                                          │
-│     { role: "system", content: "You are..." },          │
-│     { role: "user", content: "Hi, I'm John" },    ← T1  │
-│     { role: "assistant", content: "Hello John!" },      │
-│     { role: "user", content: "My dog is sick" },  ← T2  │
-│     { role: "assistant", content: "Sorry to..." },      │
-│     { role: "user", content: "What should I do?"} ← T3  │
-│   ]                                                     │
-│                                                         │
-│   LLM sees ENTIRE history each turn!                    │
-│                                                         │
-└─────────────────────────────────────────────────────────┘
-</pre>
+                <strong>How Message History Grows (Tokens Multiplier)</strong>
+                <pre style="text-align: left; padding: 20px;">
+Turn 1: [System] + [User 1]                              (100 tokens)
+Turn 2: [System] + [User 1] + [AI 1] + [User 2]         (350 tokens)
+Turn 3: [System] + [User 1] + [AI 1] + [User 2] + [AI 2] + [User 3] (700 tokens)
+... Cost and latency grow exponentially!
+                </pre>
             </div>
 
-            <table class="table">
-                <tr>
-                    <th>Strategy</th>
-                    <th>When to Use</th>
-                    <th>How It Works</th>
-                </tr>
-                <tr>
-                    <td><strong>Full History</strong></td>
-                    <td>Short conversations</td>
-                    <td>Send all messages every time</td>
-                </tr>
-                <tr>
-                    <td><strong>Sliding Window</strong></td>
-                    <td>Long conversations</td>
-                    <td>Keep last N turns only</td>
-                </tr>
-                <tr>
-                    <td><strong>Summarization</strong></td>
-                    <td>Very long chats</td>
-                    <td>Summarize old turns, keep recent</td>
-                </tr>
-                <tr>
-                    <td><strong>Selective Memory</strong></td>
-                    <td>Task-focused</td>
-                    <td>Keep key facts, drop small talk</td>
-                </tr>
-            </table>
+            <h3>💡 Advanced Memory Management Strategies</h3>
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>🪟 Sliding Window</strong>
+                    <p>Keep only the last <em>N</em> messages. The oldest messages are "dropped" to keep context fresh
+                        and costs low.</p>
+                    <small>Best for: Customer support bots, simple chat.</small>
+                </div>
+                <div class="visual-item">
+                    <strong>📝 Summarization</strong>
+                    <p>As the chat gets long, ask the AI to "summarize the key points so far" and send that summary
+                        instead of the full log.</p>
+                    <small>Best for: Research assistants, long-form planning.</small>
+                </div>
+                <div class="visual-item">
+                    <strong>🗄️ Vector Memory (RAG)</strong>
+                    <p>Store old messages in a database. Retrieve only relevant past turns based on the current user
+                        query.</p>
+                    <small>Best for: Personal assistants with years of history.</small>
+                </div>
+                <div class="visual-item">
+                    <strong>💎 Selective Pruning</strong>
+                    <p>Strip out "noise" (like "Hello," "Thanks!") but keep core facts (User's name, preferences,
+                        goals).</p>
+                    <small>Best for: Precision-driven task agents.</small>
+                </div>
+            </div>
 
             <div class="key-concept">
-                <strong>💡 Key Insight:</strong> LLMs are stateless — they don't "remember". YOU manage conversation
-                history. Balance context (more = better understanding) vs cost (more tokens = more $).
+                <strong>💡 Quick Tip:</strong> Always place the <strong>System Instructions</strong> at the very top of
+                every history object to ensure the model never forgets "who it is," even as older user messages
+                disappear.
             </div>
         </div>
 
