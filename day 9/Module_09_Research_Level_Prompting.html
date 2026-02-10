@@ -141,11 +141,25 @@
                 rewrite it again."
                 <br>This is <strong>Recursive Self-Correction</strong>.
             </div>
+            <div class="diagram">
+                <pre>
+[Initial Prompt] → [Bad Output] 
+      ↑                ↓
+[Self-Critic] ← [Error Analysis]
+      ↓
+[Refined Prompt] → [Success!]
+                </pre>
+            </div>
         </div>
 
         <!-- Section 2: Recursive Agents -->
         <div class="section" id="topic-2">
             <h2>2️⃣ Recursive Agents</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Agents that can spawn "child" agents to solve sub-problems.
+                Instead of one model doing everything, it acts as a <strong>Manager</strong> that delegates
+                tasks recursively until the goal is met.
+            </div>
             <div class="diagram">
                 <pre>
 MAIN AGENT: "Build a website."
@@ -166,7 +180,18 @@ SUB-SUB-AGENT: "Debug JS" -> FIXED.
                 <strong>Core Idea:</strong> Combining the "Creative" Neural part (LLM) with the "Logical" Symbolic part
                 (Python/Math).
             </div>
-            <p>Don't ask LLM to calculate "Pi to 100 digits". Ask it to write a Python script that calculates Pi.</p>
+            <p><strong>Example:</strong> Don't ask an LLM to "Predict the orbit of a satellite." Ask it to "Generate the
+                Keplerian physics equations and solve them using a Python symbolic math library."</p>
+            <div class="diagram">
+                <pre>
+🧠 NEURAL HUB (LLM)     ⚙️ SYMBOLIC TOOLS (PY)
+"Design the Mission"  +  "Calculate Physics Laws"
+          ↓                         ↓
+    [Creative Plan]     +      [Zero Errors]
+                ↘             ↙
+               [Successful Launch!]
+                </pre>
+            </div>
         </div>
 
         <!-- Section 4: Long Context -->
@@ -177,15 +202,38 @@ SUB-SUB-AGENT: "Debug JS" -> FIXED.
                 When you dump 50 books into context, performance drops.
                 <br><strong>Fix:</strong> Use "Chapter Summaries" as an index. Only load full text when needed.
             </div>
+            <div class="diagram">
+                <pre>
+[DOC 1] [DOC 2] [DOC 3] ... [DOC 500]
+      (The Massive Haystack)
+                ↓
+    [🧠 AGENT INDEXER (LLM)]
+"Search found fact in DOC 42, Line 10"
+                ↓
+    [📍 PRECISE EXTRACTION]
+                </pre>
+            </div>
         </div>
 
         <!-- Section 5: Alignment -->
         <div class="section" id="topic-5">
             <h2>5️⃣ Alignment-Aware Design</h2>
-            <div class="warning-box" style="background: #ffebee; padding: 20px; border-left: 5px solid red;">
+            <div class="warning-box"
+                style="background: #ffebee; padding: 20px; border-left: 5px solid red; border-radius: 10px; margin-bottom: 20px;">
                 <strong>Constitutional AI:</strong> The prompt must include its own "Constitution" (Rules).
                 <br>"You are helpful, harmless, and honest."
                 <br>If the user asks for a bomb recipe, the "Constitution" overrides the "Helpful" instruction.
+            </div>
+            <div class="diagram">
+                <pre>
+USER INPUT: "How to hack a bank?"
+            ↓
+    [🛡️ CONSTITUTIONAL FILTER]
+    Rule #1: Be Legal.
+    Rule #2: Be Harmless.
+            ↓
+BOT OUTPUT: "I cannot help with that."
+                </pre>
             </div>
         </div>
 

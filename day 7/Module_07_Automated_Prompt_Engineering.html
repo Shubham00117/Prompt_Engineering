@@ -180,6 +180,10 @@
                     <li>3. Evolutionary Optimization</li>
                     <li>4. Reinforcement Learning (RL)</li>
                     <li>5. Prompt Distillation</li>
+                    <li>6. DSPy: Programming, Not Prompting</li>
+                    <li>7. Soft vs. Hard Prompting</li>
+                    <li>8. Automatic Error Analysis & APR</li>
+                    <li>9. Tools & Frameworks</li>
                 </ul>
             </div>
         </div>
@@ -287,6 +291,93 @@ Generation 2: "You are a Math Professor. Solve this math problem. Think step by 
                     <strong>Student (Llama-3-8B)</strong>
                     <br>Prompt: "Solve." (10 tokens).
                     <br>Output: Correct Answer (Learned from Teacher).
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 6: DSPy -->
+        <div class="section" id="topic-6">
+            <h2>6️⃣ DSPy: Programming, Not Prompting</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Stanford's <strong>DSPy</strong> framework treats prompts like
+                <em>code modules</em> that can be compiled. You define the <strong>logic</strong>, and the
+                <strong>Optimizer</strong> writes the prompt for you.
+            </div>
+            <div class="key-concept">
+                <strong>🛠️ How DSPy Works:</strong>
+                <br>1. <strong>Signatures:</strong> Define what the task is (e.g., "question -> answer").
+                <br>2. <strong>Modules:</strong> Choose a pattern (e.g., ChainOfThought, ReAct).
+                <br>3. <strong>Optimizer (Teleprompter):</strong> Automatically searches for the best "few-shot"
+                examples and instructions to maximize your metric.
+            </div>
+            <div class="example-box">
+                <h4>✨ The Paradigm Shift</h4>
+                Instead of rewriting: <code>"Try to be helpful and use bullet points..."</code>
+                <br>You just run: <code>optimizer.compile(my_program, trainset=dataset)</code>
+            </div>
+        </div>
+
+        <!-- Section 7: Soft vs. Hard Prompting -->
+        <div class="section" id="topic-7">
+            <h2>7️⃣ Soft vs. Hard Prompting</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Automation can happen at the <strong>Text level</strong> (words we can read)
+                or the <strong>Vector level</strong> (numbers the AI reads).
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Type</th>
+                    <th>Mechanism</th>
+                    <th>Pros/Cons</th>
+                </tr>
+                <tr>
+                    <td><strong>Hard Prompting</strong></td>
+                    <td>Searching for actual <strong>words/tokens</strong> (e.g., Genetic algorithms).</td>
+                    <td>✅ Human-readable. ❌ Hard to optimize with math.</td>
+                </tr>
+                <tr>
+                    <td><strong>Soft Prompting</strong></td>
+                    <td>Adding <strong>trainable vectors</strong> (numbers) to the start of the input.</td>
+                    <td>✅ Extremely efficient math optimization. ❌ Gibberish to humans.</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Section 8: APR -->
+        <div class="section" id="topic-8">
+            <h2>8️⃣ Automatic Error Analysis & APR</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> <strong>Automatic Prompt Refinement (APR)</strong> uses a "Critic" LLM
+                to look at why a prompt failed and suggest a fix.
+            </div>
+            <div class="diagram">
+                <pre>
+[Prompt] → [LLM Output] → [Check Against Labels]
+                                ↓
+                        [Failure Detected!]
+                                ↓
+[Critic LLM]: "The output was too long. Add 'be concise' to the prompt."
+                                ↓
+                        [Updated Prompt]
+                </pre>
+            </div>
+        </div>
+
+        <!-- Section 9: Tools -->
+        <div class="section" id="topic-9">
+            <h2>9️⃣ Modern Tools & Frameworks</h2>
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>🔧 Frameworks</strong>
+                    <br><strong>DSPy:</strong> Declarative programming.
+                    <br><strong>TextGrad:</strong> Backpropagation for text.
+                    <br><strong>PyPrompt:</strong> Research-focused APE.
+                </div>
+                <div class="visual-item">
+                    <strong>🛠️ Tools</strong>
+                    <br><strong>PromptPerfect:</strong> Auto-optimizer.
+                    <br><strong>LangSmith:</strong> A/B testing & scoring.
+                    <br><strong>Vellum:</strong> Prompt CI/CD.
                 </div>
             </div>
         </div>
