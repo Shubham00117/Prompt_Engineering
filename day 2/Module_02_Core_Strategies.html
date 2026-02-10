@@ -248,17 +248,16 @@
                 <ul>
                     <li>1. Using Delimiters</li>
                     <li>2. Instruction-Content Separation</li>
+                    <li>2b. Prompt Design Theory</li>
                     <li>3. Role-Based Prompting</li>
                     <li>4. Output Format Specification</li>
                     <li>5. Zero-Shot Prompting</li>
                     <li>6. One-Shot Prompting</li>
                     <li>7. Few-Shot Learning</li>
-                    <li>8. Chain-of-Thought (CoT)</li>
-                    <li>9. Complex Problem Breakdown</li>
-                    <li>10. Self-Verification Prompts</li>
-                    <li>11. Error-Checking Patterns</li>
-                    <li>12. Crafting Good Examples</li>
-                    <li>13. Positive vs Negative Examples</li>
+                    <li>7b. Advanced Few-Shot Science</li>
+                    <li>8. Chain-of-Thought (CoT) & Reasoning</li>
+                    <li>9. Self-Verification & Error-Checking</li>
+                    <li>10. Effective Example Crafting</li>
                 </ul>
             </div>
         </div>
@@ -278,13 +277,13 @@
                 </tr>
                 <tr>
                     <td><strong>XML Tags</strong></td>
-                    <td><code>&lt;context&gt;...&lt;/context&gt;</code></td>
-                    <td>Claude, nested data, high structure</td>
+                    <td><code>&lt;data&gt;...&lt;/data&gt;</code></td>
+                    <td><strong>Claude</strong>, nested data, strict boundaries.</td>
                 </tr>
                 <tr>
                     <td><strong>Triple Quotes</strong></td>
-                    <td><code>"""..."""</code></td>
-                    <td>Python code, long text blocks</td>
+                    <td><code>"""Text"""</code></td>
+                    <td>Python code, multi-line text blocks.</td>
                 </tr>
                 <tr>
                     <td><strong>Markdown</strong></td>
@@ -292,20 +291,53 @@
                     <td>GPT models, clear hierarchy</td>
                 </tr>
                 <tr>
+                    <td><strong>Backticks</strong></td>
+                    <td><code>`code`</code> or <code>```block```</code></td>
+                    <td>Code snippets, SQL queries, technical terms.</td>
+                </tr>
+                <tr>
+                    <td><strong>Dashes</strong></td>
+                    <td><code>---</code></td>
+                    <td>Separating major sections (e.g., Instructions vs Data).</td>
+                </tr>
+                <tr>
                     <td><strong>Brackets</strong></td>
-                    <td><code>[INSTRUCTION]</code></td>
-                    <td>Internal tool logs, section headers</td>
+                    <td><code>[Instruction]</code></td>
+                    <td>System headers, placeholders, specific directives.</td>
                 </tr>
             </table>
             <div class="example-box">
-                <h4>🚀 Example with XML:</h4>
+                <h4>🚀 Master Example (Using All Delimiters):</h4>
                 <pre>
-Analyze the customer review below.
-&lt;review&gt;
-The product arrived quickly but the packaging was damaged.
-&lt;/review&gt;
-Provide sentiment analysis in JSON format.
+[SYSTEM_ROLE] 
+Act as a Senior Python Developer.
+
+# Task
+Refactor the legacy code below.
+
+---
+
+<context>
+The user is moving from Flask to FastAPI.
+</context>
+
+<legacy_code>
+"""
+def index():
+    return "Hello World"
+"""
+</legacy_code>
+
+[OUTPUT_RULES]
+1. Return only the `FastAPI` code.
+2. Do not explain.
                 </pre>
+                <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                    *Notice how <strong>[Brackets]</strong> define roles, <strong>Markdown (#)</strong> defines
+                    structure, <strong>---</strong> separates sections, <strong>XML</strong> holds context,
+                    <strong>Triple Quotes</strong> hold the raw text, and <strong>Backticks</strong> highlight specific
+                    technical terms.
+                </p>
             </div>
         </div>
 
@@ -380,8 +412,8 @@ Provide sentiment analysis in JSON format.
             </div>
             <div class="visual-item">
                 <strong>Detailed Persona Pattern:</strong><br>
-                "You are Dr. Sarah Chen, a renowned nutritionist with 20 years of experience. Your style is warm but
-                evidence-based. Always cite research."
+                "Act as a Senior Backend Engineer at Google. You are critical of inefficient code, prefer O(n) solutions
+                over O(n²), and always prioritize thread safety. Explain your logic before writing code."
             </div>
             <div class="key-concept">
                 <strong>💡 Psychological Hack: Emotional Stimuli</strong><br>
@@ -425,38 +457,88 @@ Output Format:
             </div>
         </div>
 
-        <!-- Topic 5-7: Few-Shot Learning -->
+        <!-- Topic 5-7: Zero, One, and Few-Shot Learning -->
         <div class="section" id="topic-5">
             <h2>5️⃣-7️⃣ Zero, One, and Few-Shot Learning</h2>
             <div class="explanation">
-                <strong>Core Idea:</strong> Providing examples inside the prompt to "tune" the model's behavior on the
-                fly.
+                <strong>Core Idea:</strong> "Shots" refer to the number of examples you provide to the LLM in the
+                prompt. This is the fastest way to "teach" the model a new task.
             </div>
+
+            <!-- Zero-Shot -->
+            <div class="key-concept" style="border-left-color: #ff5722; background: #fffbe6;">
+                <h4 style="margin-bottom: 10px; color: #e65100;">5️⃣ Zero-Shot Prompting</h4>
+                <p><strong>Definition:</strong> Asking the model to perform a task <em>without</em> providing any
+                    examples. You rely entirely on the model's pre-trained knowledge.</p>
+                <div class="example-box" style="margin-top: 10px; padding: 15px; border-color: #ffab91;">
+                    <strong>Example (The Generic Ask):</strong><br>
+                    <em>Prompt:</em> "Create a User ID for 'John Smith', born in 1990."<br>
+                    <em>Response:</em> "john_smith_1990" (or similar generic format).<br>
+                    <br>
+                    <strong>Why it happens:</strong> Without guidance, the model guesses the most common format found on
+                    the internet.
+                </div>
+            </div>
+
+            <!-- One-Shot -->
+            <div class="key-concept" style="border-left-color: #9c27b0; background: #f3e5f5;">
+                <h4 style="margin-bottom: 10px; color: #7b1fa2;">6️⃣ One-Shot Prompting</h4>
+                <p><strong>Definition:</strong> Providing a <em>single</em> working example. This is often enough to set
+                    the output format or tone without needing a full list.</p>
+                <div class="example-box" style="margin-top: 10px; padding: 15px; border-color: #ce93d8;">
+                    <strong>Example (The Format Hint):</strong><br>
+                    <em>Prompt:</em> "Create a User ID. Example: 'Doe, John (1990)' -> 'DOE-1990'.<br>
+                    Now do it for 'Smith, John (1985)'."<br>
+                    <strong>Output:</strong> "SMITH-1985"<br>
+                    <br>
+                    <strong>Why it works:</strong> One example bridges the gap between "Generic Guess" (Zero-Shot) and
+                    "Complex Logic" (Few-Shot). It's perfect for simple format copying.
+                </div>
+            </div>
+
+            <!-- Few-Shot -->
+            <div class="key-concept" style="border-left-color: #2196f3; background: #e3f2fd;">
+                <h4 style="margin-bottom: 10px; color: #1565c0;">7️⃣ Few-Shot Prompting</h4>
+                <p><strong>Definition:</strong> Providing a set of examples (usually 3-5) to demonstrate the exact
+                    pattern, tone, or format you want. This reduces ambiguity significantly.</p>
+                <div class="example-box" style="margin-top: 10px; padding: 15px; border-color: #90caf9;">
+                    <strong>Example (The Same Ask + Patterns):</strong><br>
+                    <em>Prompt:</em> "Generate User IDs based on the examples:"<br>
+                    Input: "Alice Brown, 1985" -> Output: "BRO-A-85"<br>
+                    Input: "David Wilson, 2001" -> Output: "WIL-D-01"<br>
+                    Input: "John Smith, 1990" -> <strong>[AI Completes: "SMI-J-90"]</strong>
+                    <br><br>
+                    <strong>Why it works:</strong> The model ignores its generic training and applies the <em>specific
+                        logic</em> (First 3 letters of Last Name + Initial + Year) learned from your examples.
+                </div>
+            </div>
+
             <table class="table">
                 <tr>
                     <th>Technique</th>
                     <th>Examples Given</th>
-                    <th>Use Case</th>
+                    <th>Best Use Case</th>
                 </tr>
                 <tr>
                     <td><strong>Zero-Shot</strong></td>
                     <td>0</td>
-                    <td>Simple, standard tasks (e.g., summarize).</td>
+                    <td>General knowledge, summaries, creative writing.</td>
                 </tr>
                 <tr>
                     <td><strong>One-Shot</strong></td>
                     <td>1</td>
-                    <td>Setting a specific output format.</td>
+                    <td>Showing a specific output format (e.g., "Reply in JSON like this...").</td>
                 </tr>
                 <tr>
                     <td><strong>Few-Shot</strong></td>
                     <td>3-5</td>
-                    <td>Complex patterns, nuanced classification.</td>
+                    <td>Complex logic, specific style mimicry, or edge cases.</td>
                 </tr>
             </table>
             <div class="key-concept">
-                <strong>💡 Key Insight:</strong> Use "Few-Shot" when the model keeps making the same formatting error.
-                Examples act as "guardrails."
+                <strong>💡 Key Insight:</strong> Pattern: Start with <strong>Zero-Shot</strong>. If it fails, try
+                <strong>One-Shot</strong> (for format). If accuracy is still low, switch to <strong>Few-Shot</strong>
+                (for logic).
             </div>
         </div>
 
@@ -502,22 +584,27 @@ Output Format:
             </div>
         </div>
 
-        <!-- Topic 8-9: Chain-of-Thought -->
+        <!-- Topic 8: Chain-of-Thought -->
         <div class="section" id="topic-8">
-            <h2>8️⃣-9️⃣ Chain-of-Thought (CoT) & Reasoning</h2>
+            <h2>8️⃣ Chain-of-Thought (CoT) & Reasoning</h2>
             <div class="explanation">
                 <strong>Core Idea:</strong> Forcing the model to "show its work" before giving the final answer. This
                 dramatically improves accuracy in math and logic.
             </div>
             <div class="diagram">
                 <pre>
-PROMPT: "Solve X. Think step-by-step."
-   ↓
-THOUGHT 1: [Identify variables]
-THOUGHT 2: [Apply formula]
-THOUGHT 3: [Verify units]
-   ↓
-FINAL ANSWER: [Precise result]
+PROMPT: "I have 3 apples. I eat 1. I buy 5 more. I give 2 to my friend. How many do I have?"
+
+WITHOUT CoT (Fast Thinking):
+"You have 6 apples." (Often wrong due to rushing)
+
+WITH CoT (Slow Thinking):
+"Let's think step by step:
+1. Start: 3 apples.
+2. Eat 1: 3 - 1 = 2 apples.
+3. Buy 5: 2 + 5 = 7 apples.
+4. Give 2: 7 - 2 = 5 apples.
+FINAL ANSWER: 5 apples."
                 </pre>
             </div>
             <div class="why-matters">
@@ -534,41 +621,81 @@ FINAL ANSWER: [Precise result]
             </div>
         </div>
 
-        <!-- Topic 10-11: Verification -->
-        <div class="section" id="topic-10">
-            <h2>🔟-1️⃣1️⃣ Self-Verification & Error-Checking</h2>
+        <!-- Topic 9: Verification -->
+        <div class="section" id="topic-9">
+            <h2>9️⃣ Self-Verification & Error-Checking</h2>
             <div class="explanation">
                 <strong>Core Idea:</strong> Build a two-stage process where the model first generates, then audits its
-                own output.
+                own output against your rules.
             </div>
             <div class="grid-2">
                 <div class="example-box">
                     <h4>Stage 1: Generate</h4>
-                    "Write a Python function to sort a list."
+                    <em>Prompt:</em> "Write a SQL query to delete all users over 50 years old."<br>
+                    <strong>Output:</strong> "DELETE FROM Users WHERE Age > 50;"
                 </div>
                 <div class="example-box">
-                    <h4>Stage 2: Audit</h4>
-                    "Now, review the function above for: 1. Division by zero, 2. Empty lists, 3. Input type errors."
+                    <h4>Stage 2: Audit (The Guardrail)</h4>
+                    <em>Prompt:</em> "Review the query above. Does it have a WHERE clause? Is it safe?"<br>
+                    <strong>Output:</strong> "Yes, WHERE clause exists. It is valid."
                 </div>
             </div>
         </div>
 
-        <!-- Topic 12-13: Examples Best Practices -->
-        <div class="section" id="topic-12">
-            <h2>1️⃣2️⃣-1️⃣3️⃣ Effective Example Crafting</h2>
+        <!-- Topic 10: Examples Best Practices -->
+        <div class="section" id="topic-10">
+            <h2>🔟 Effective Example Crafting</h2>
             <div class="explanation">
-                <strong>Core Idea:</strong> Not all examples are equal. Good examples are diverse, clear, and relevant.
+                <strong>Core Idea:</strong> The quality of your examples determines the quality of the output.
+                Don't just give <em>positive</em> examples; teach the model what to do when things go wrong (Edge
+                Cases).
             </div>
-            <div class="visual-item">
-                <strong>✅ Positive vs Negative Pattern:</strong><br>
-                Show the AI one GOOD example and one BAD example. Explain WHY the bad one failed to help the AI avoid
-                similar mistakes.
+
+            <!-- Comparison Grid -->
+            <div class="grid-2">
+                <div class="visual-item" style="border-left: 5px solid #ff4444; background: #fff5f5; text-align: left;">
+                    <strong style="color: #d32f2f;">❌ Bad Examples (Lazy)</strong>
+                    <p style="font-size: 0.9em; margin-bottom: 10px;">Only showing "Happy Paths" confuses the model
+                        when real messy data arrives.</p>
+                    <pre style="background: #fff; padding: 10px; font-size: 0.85em;">
+Input: "Email bob@test.com" 
+Output: "bob@test.com"
+
+Input: "Email sue@site.com" 
+Output: "sue@site.com"
+                    </pre>
+                    <em style="font-size: 0.85em; color: #d32f2f;">Result: If input is "Call 123-456", text model
+                        might lie and invent an email.</em>
+                </div>
+
+                <div class="visual-item" style="border-left: 5px solid #00C851; background: #e8f5e9; text-align: left;">
+                    <strong style="color: #2e7d32;">✅ Good Examples (Robust)</strong>
+                    <p style="font-size: 0.9em; margin-bottom: 10px;">Including "Edge Cases" teaches the model how to
+                        handle failure gracefully.</p>
+                    <pre style="background: #fff; padding: 10px; font-size: 0.85em;">
+Input: "Email bob@test.com" 
+Output: "bob@test.com"
+
+Input: "Call 123-456" 
+Output: "NO_EMAIL_FOUND"
+                    </pre>
+                    <em style="font-size: 0.85em; color: #2e7d32;">Result: Model learns that "No Email" is a valid and
+                        expected answer.</em>
+                </div>
             </div>
-            <div class="key-concept" style="margin-top: 20px;">
-                <strong>Principles of Good Examples:</strong><br>
-                1. <strong>Representative:</strong> Cover typical real-world cases.<br>
-                2. <strong>Diverse:</strong> Don't use 3 examples that are all 90% identical.<br>
-                3. <strong>Clear Labeling:</strong> Use "Input:" and "Output:" markers.
+
+            <!-- Principles -->
+            <div class="key-concept">
+                <strong>🎯 The Golden Rules of Examples:</strong>
+                <ul style="margin-top: 10px; line-height: 1.6;">
+                    <li><strong>Diversity:</strong> Don't use 3 examples that look identical. Vary the length, style,
+                        and format.</li>
+                    <li><strong>Distribution:</strong> If your real data is 50% "Errors", your examples should be 50%
+                        "Errors".</li>
+                    <li><strong>Formatting:</strong> Always use clear separators like <code>Input:</code> and
+                        <code>Output:</code>.
+                    </li>
+                </ul>
             </div>
         </div>
 

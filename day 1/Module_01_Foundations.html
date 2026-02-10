@@ -247,18 +247,15 @@
                 <h4>Quick Navigation</h4>
                 <ul>
                     <li>1. What are LLMs?</li>
-                    <li>2. Tokens and Tokenization</li>
-                    <li>3. Context Windows (Latest Caps)</li>
-                    <li>4. Temperature & Sampling</li>
-                    <li>5. The Prompt Eng. Mindset</li>
-                    <li>6. Ethical Considerations</li>
-                    <li>7. Clear & Specific Instructions</li>
-                    <li>8. The Importance of Context</li>
-                    <li>9. CRISP Framework</li>
-                    <li>10. Single vs Multi-Turn</li>
-                    <li>11. Common Pitfalls</li>
-                    <li>12. Prompt Structure Template</li>
-                    <li>13. Latest LLM Landscape</li>
+                    <li>1b. Deep Dive: LLM Internals</li>
+                    <li>2. Tokens: The Currency of LLMs</li>
+                    <li>3. Context Windows (2026 Standards)</li>
+                    <li>4. Temperature: Controlling Creativity</li>
+                    <li>4b. Advanced Sampling Controls</li>
+                    <li>5. The Prompt Engineering Mindset</li>
+                    <li>6. CRISP: The Professional Framework</li>
+                    <li>7. Single-Turn vs Multi-Turn</li>
+                    <li>8. Common Pitfalls & Templates</li>
                 </ul>
             </div>
         </div>
@@ -299,31 +296,7 @@
             </div>
         </div>
 
-        <!-- Topic 2: Tokens and Tokenization -->
-        <div class="section" id="topic-2">
-            <h2>2️⃣ Tokens: The Currency of LLMs</h2>
-            <div class="explanation">
-                <strong>Core Idea:</strong> LLMs process text in "tokens" (chunks of characters), not words. 1 token ≈
-                0.75 words or 4 characters in English.
-            </div>
-            <div class="diagram">
-                <pre>
-RAW TEXT: "Tokenization"
-         ↓
-TOKENS: ["Token", "ization"]
-         ↓
-IDs:    [30561, 1632]
-                </pre>
-            </div>
-            <div class="why-matters">
-                <strong>💎 Why Tokens Matter:</strong><br>
-                • <strong>Cost:</strong> APIs charge per token (Input + Output).<br>
-                • <strong>Limits:</strong> Every model has a hard "Context Window" limit.<br>
-                • <strong>Bias:</strong> Non-English languages often use more tokens per word.
-            </div>
-        </div>
-
-        <!-- Topic 1b: LLM Internals (New) -->
+        <!-- Topic 1b: LLM Internals -->
         <div class="section" id="topic-1b">
             <h2>1️⃣b Deep Dive: LLM Internals</h2>
             <div class="explanation">
@@ -376,6 +349,30 @@ IDs:    [30561, 1632]
                     <td>Why models refuse "harmful" prompts (Safety).</td>
                 </tr>
             </table>
+        </div>
+
+        <!-- Topic 2: Tokens and Tokenization -->
+        <div class="section" id="topic-2">
+            <h2>2️⃣ Tokens: The Currency of LLMs</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> LLMs process text in "tokens" (chunks of characters), not words. 1 token ≈
+                0.75 words or 4 characters in English.
+            </div>
+            <div class="diagram">
+                <pre>
+RAW TEXT: "Tokenization"
+         ↓
+TOKENS: ["Token", "ization"]
+         ↓
+IDs:    [30561, 1632]
+                </pre>
+            </div>
+            <div class="why-matters">
+                <strong>💎 Why Tokens Matter:</strong><br>
+                • <strong>Cost:</strong> APIs charge per token (Input + Output).<br>
+                • <strong>Limits:</strong> Every model has a hard "Context Window" limit.<br>
+                • <strong>Bias:</strong> Non-English languages often use more tokens per word.
+            </div>
         </div>
 
         <!-- Topic 3: Context Windows -->
@@ -478,9 +475,9 @@ IDs:    [30561, 1632]
             </table>
         </div>
 
-        <!-- Topic 5-8: Mindset & Techniques -->
+        <!-- Topic 5: Mindset -->
         <div class="section" id="topic-5">
-            <h2>5️⃣-8️⃣ The Prompt Engineering Mindset</h2>
+            <h2>5️⃣ The Prompt Engineering Mindset</h2>
             <div class="explanation">
                 Prompt engineering is the iterative practice of designing inputs that guide LLMs toward specific,
                 high-quality outputs.
@@ -512,9 +509,9 @@ IDs:    [30561, 1632]
             </div>
         </div>
 
-        <!-- Topic 9: CRISP Framework -->
-        <div class="section" id="topic-9">
-            <h2>9️⃣ CRISP: The Professional Framework</h2>
+        <!-- Topic 6: CRISP Framework -->
+        <div class="section" id="topic-6">
+            <h2>6️⃣ CRISP: The Professional Framework</h2>
             <div class="explanation">
                 <strong>Core Idea:</strong> A structured way to build any complex prompt.
             </div>
@@ -552,9 +549,9 @@ IDs:    [30561, 1632]
             </table>
         </div>
 
-        <!-- Topic 10: Single vs Multi-Turn -->
-        <div class="section" id="topic-10">
-            <h2>🔟 Single-Turn vs Multi-Turn</h2>
+        <!-- Topic 7: Single vs Multi-Turn -->
+        <div class="section" id="topic-7">
+            <h2>7️⃣ Single-Turn vs Multi-Turn</h2>
             <div class="explanation">
                 <strong>Core Idea:</strong> Matching the interaction style to the task complexity.
             </div>
@@ -573,9 +570,9 @@ IDs:    [30561, 1632]
             </div>
         </div>
 
-        <!-- Topic 11-12: Pitfalls & Templates -->
-        <div class="section" id="topic-11">
-            <h2>1️⃣1️⃣-1️⃣2️⃣ Common Pitfalls & Templates</h2>
+        <!-- Topic 8: Pitfalls & Templates -->
+        <div class="section" id="topic-8">
+            <h2>8️⃣ Common Pitfalls & Templates</h2>
             <div class="warning-box">
                 <h4>⚠️ Avoid These Mistakes:</h4>
                 • <strong>Ambiguity:</strong> Saying "Make it good" instead of "Increase readability".<br>

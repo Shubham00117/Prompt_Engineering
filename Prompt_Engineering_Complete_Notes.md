@@ -7,112 +7,98 @@ This comprehensive guide covers everything from foundational LLM mechanics to cu
 ## 🏗️ Module 1: Foundations of Prompt Engineering
 *Understanding the "Engine" to write better instructions.*
 
-### 1.1 The Mechanics of LLMs
+### 1️⃣ What are Large Language Models (LLMs)?
 Large Language Models (LLMs) are **prediction machines**, not knowledge databases. They predict the next token based on probability.
 
-#### 🔹 Tokenization
+### 1️⃣b Deep Dive: LLM Internals
+- **Embeddings:** Words are converted into lists of numbers (vectors).
+- **Attention Mechanism:** The model looks back at previous words to understand context.
+- **Positional Encodings:** LLMs process all words *simultaneously* (parallel), telling the model word order.
+
+### 2️⃣ Tokens: The Currency of LLMs
 - **What is it?** LLMs don't read words; they read "tokens" (chunks of characters).
 - **Rule of Thumb:** 1000 tokens ≈ 750 words.
-- **Why it matters:**
-  - **Math:** 4-digit numbers might be 1-3 tokens. This makes math hard for LLMs.
-  - **Code:** Indentation (whitespace) is tokens. Python is token-heavy.
-  - **Typos:** "Appple" is a different token ID than "Apple", confusing the model.
+- **Math & Code:** 4-digit numbers or Python indentation can be token-heavy, impacting accuracy and cost.
 
-#### 🔹 The Context Window
+### 3️⃣ The Context Window
 - **Analogy:** The "RAM" of the LLM. It's how much text it can "hold in mind" at once.
-- **Sliding Window:** As new text enters, old text falls out of the window (is forgotten).
 - **Needle in a Haystack:** Performance drops when the window is full. Critical instructions should be at the **beginning** or **end** (Recency Bias).
 
-### 1.2 Deep Dive: LLM Internals
-Understanding the architecture helps debug bad outputs.
-
-- **Embeddings:** Words are converted into lists of numbers (vectors).
-  - *Example:* "King" and "Queen" have similar vector directions. "King" - "Man" + "Woman" ≈ "Queen".
-- **Attention Mechanism:** The model looks back at previous words to understand context.
-  - When referencing "it", the model attends to "The dog" mentioned earlier.
-- **Positional Encodings:** LLMs process all words *simultaneously* (parallel), not sequentially. Encodings tell it that "Dog bites Man" is different from "Man bites Dog".
-
-### 1.3 The CRISP Framework
-A structured way to write perfect prompts every time.
-
-1.  **C - Context:** Who are you? What is the situation?
-    - *"I am a junior developer debugging legacy code..."*
-2.  **R - Role:** Who should the AI be?
-    - *"Act as a Senior Python Architect."*
-3.  **I - Intent:** What is the goal?
-    - *"Explain the bug and fix it."*
-4.  **S - Specifics:** Constraints and details.
-    - *"Use Python 3.9 features only. No libraries."*
-5.  **P - Presentation:** Format of output.
-    - *"Output as a Markdown table."*
-
-### 1.4 Controlling the "Chaos" (Parameters)
-LLMs are probabilistic. You can control their randomness.
+### 4️⃣ Temperature & Sampling
 - **Temperature (0.0 - 2.0):**
-  - **Low (0.0 - 0.3):** Logical, deterministic, focused. (Code, Math).
-  - **High (0.8 - 1.2):** Creative, random, diverse. (Poetry, Brainstorming).
-- **Top-P (Nucleus Sampling):** "Only consider the top X% probability mass."
-  - Often better than Temperature for maintaining coherence while being creative.
-- **Top-K:** "Only consider the top K words." Hard cutoff.
-- **Frequency Penalty:** "Don't repeat words you've already said." (Fixes repetitive loops).
+  - **Low (0.0 - 0.3):** Logical, deterministic. (Code, Math).
+  - **High (0.8 - 1.2):** Creative, random. (Poetry, Brainstorming).
+- **Sampling (Top-P/Top-K):** "Only consider the top X% probability mass." Prevents low-probability "nonsense" while maintaining creativity.
+
+### 5️⃣ The Prompt Engineering Mindset
+- Prompting is an iterative "Science of Trial and Error." 
+- Move from "Asking" to "Architecting."
+
+### 6️⃣ The CRISP Framework
+1. **C - Context:** Current situation.
+2. **R - Role:** Assigned persona.
+3. **I - Intent:** The primary goal.
+4. **S - Specifics:** Constraints and details.
+5. **P - Presentation:** Output format.
+
+### 7️⃣ Single vs Multi-Turn Management
+- Managing "Context Drift" in long conversations. 
+- Using "Summarization Memory" for long threads.
+
+### 8️⃣ Common Pitfalls & Solutions
+- Handling hallucinations, instruction following errors, and bias.
 
 ---
 
 ## 🛠️ Module 2: Core Prompting Strategies
 *Design patterns for reliable outputs.*
 
-### 2.1 Prompt Design Theory
-Prompting is software engineering.
-- **Instruction Hierarchy:** Place the *primary directive* at the very top.
-- **Negative Constraints:** Avoid "Don't do X". The model focuses on "X".
-  - *Bad:* "Do not write complex sentences."
-  - *Good:* "Write simple, short sentences."
-- **Delimiters:** Use XML tags (`<context>`, `<code_block>`) or triple quotes (`"""`) to separate instructions from data. This prevents the model from confusing *your instructions* with *the text to analyze*.
+### 1️⃣ Using Delimiters
+- Use XML tags (`<context>`, `<code_block>`) or triple quotes (`"""`) to separate instructions from data.
 
-### 2.2 Role-Based Prompting (Personas)
-Assigning a persona primes the model's latent space (activates specific specialized knowledge).
-- **Standard:** "Write a blog post." (Generic, average quality).
-- **Persona:** "You are an award-winning Tech Journalist for Wired Magazine..." (Specific tone, vocabulary, and structure).
-- **Tip:** Give the persona a *goal* and a *backstory* for better adherence.
+### 2️⃣ Instruction-Content Separation
+- Preventing "Prompt Leakage" and ensuring the model knows what is data vs. what is instruction.
 
-### 2.3 Few-Shot Prompting (In-Context Learning)
-Giving examples is the most powerful way to improve performance without training.
-- **Zero-Shot:** Just the instruction.
-- **One-Shot:** One example.
-- **Few-Shot:** 3-5 examples.
+### 2️⃣b Prompt Design Theory
+- **Instruction Hierarchy:** Place primary directives at the top/bottom.
+- **Negative Constraints:** Use "Write simply" instead of "Don't write complexly."
 
-#### Advanced Few-Shot Science
-- **Example Selection (KNN):** Don't use static examples. Dynamically pick examples that are *semantically similar* to the current problem (using embeddings).
-- **Order Effects:** The *last* example has the biggest impact. If the model struggles with a specific edge case, put that example *last*.
-- **Diversity:** Ensure examples cover different types of inputs (short/long, simple/complex) to prevent overfitting to one style.
+### 3️⃣ Role-Based Prompting (Personas)
+- Primes the model's latent space. Give a *goal* and a *backstory* for better adherence.
+
+### 4️⃣ Output Format Specification
+- Requesting JSON, Markdown, or tables explicitly to facilitate downstream processing.
+
+### 5️⃣-7️⃣ Zero, One, and Few-Shot Learning
+- **One-Shot:** One example. **Few-Shot:** 3-5 examples.
+- **Order Effects:** The *last* example has the biggest impact.
+
+### 8️⃣ Chain-of-Thought (CoT) & Reasoning
+- "Think step-by-step" forcing "internal monologues" to increase accuracy in logic.
+
+### 9️⃣ Complex Problem Breakdown
+- Decomposing one massive prompt into a sequence of smaller, manageable tasks.
+
+### 🔟 Self-Verification Prompts
+- Asking the model to "Check your work for errors before presenting the final answer."
 
 ---
 
-## 🚀 Module 3: Advanced Reasoning & Architecture
-*Moving from "Chat" to "Thought".*
+## 🚀 Module 3: Advanced RAG & DAG Architectures
+*Moving from "Search" to "Architecture".*
 
-### 3.1 Chain-of-Thought (CoT)
-LLMs are bad at mental math because they predict one word at a time without "thinking."
-- **Standard Prompt:** "Roger has 5 balls. He buys 2 cans of tennis balls (3 per can). How many balls?" -> *Model might guess 8 or 11 randomly.*
-- **CoT Prompt:** "Think step-by-step. First calculate... then add..." -> *Model outputs reasoning trace → Gets correct answer.*
-- **Program-of-Thought (PoT):** Ask the model to write a Python script to solve the problem, then run the script. This separates *logic* (LLM) from *calculation* (Python).
+### 1️⃣ Retrieval-Augmented Generation (RAG)
+Giving the model a "textbook" (your data) to read before answering. 
 
-### 3.2 Retrieval-Augmented Generation (RAG)
-Giving the model a "textbook" to read before answering.
-- **The Flow:**
-  ```
-  User Query -> [Embedding Model] -> Vector
-                                       |
-  [Vector DB] <---(Similarity Search)--+
-       |
-    b. Documents
-       |
-  [LLM Context] -> Answer
-  ```
-- **Key Challenge:** "Lost in the Middle". Models often ignore text in the middle of a long context window.
-- **Deep RAG Strategies:**
-  - **Hybrid Search:** Combine Keyword Search (exact matches) with Vector Search (conceptual matches).
-  - **Query Rewriting:** Rewrite the user's vague query ("How much?") into a searchable query ("Pricing for Enterprise Plan").
+### 2️⃣ Vector Databases & Embeddings
+Storing documents as numbers (vectors) to allow conceptual similarity search instead of just keyword matching.
+
+### 3️⃣ Graph RAG & DAG (Directed Acyclic Graphs)
+- **Graph RAG:** Mapping relationships between entities for complex knowledge.
+- **DAGs:** Structuring AI workflows as a sequence of directional steps without loops.
+
+### 4️⃣ Evaluation of RAG Systems
+Metrics like "Faithfulness" (Is it in the source?) and "Relevance" (Does it answer the query?).
 
 ### 3.3 Defensive Prompting
 Protecting your application from attacks.
@@ -131,94 +117,87 @@ Protecting your application from attacks.
 ## 🎯 Module 4: Domain-Specific Applications
 *Applied Prompt Engineering for real-world tasks.*
 
-### 4.1 Marketing & Content Creation
-Using frameworks to structure creative output.
-- **PAS Framework:**
-  1.  **Problem:** Identify the pain point.
-  2.  **Agitation:** Make it feel worse (emotional impact).
-  3.  **Solution:** Present your product as the only fix.
-- **Persona Alignment:** "Adopt the voice of a skeptical CTO" vs "Enthusiastic Intern".
-- **Tone Alignment:** Dynamically adjust to the user.
-  - *User:* "This is broken!" -> *AI:* "I'm so sorry, let's fix it." (Empathetic).
-  - *User:* "Fix this." -> *AI:* "Done." (Concise).
+### 1️⃣ Writing & Professional Editing
+- Tone matching, style guides, and automated proofreading.
 
-### 4.2 Code Generation & Debugging
-LLMs are great at code, but bad at *context*.
-- **Context is King:** Paste the *whole file* or relevant snippets, not just the error.
-- **Unit Test Generation:** Ask the model to write tests *before* the code (TDD).
-  - "Write 5 Pytest cases for this function covering edge cases (empty list, null input)."
-- **Debugging:**
-  - "Explain the bug first, then fix it." (Forces reasoning).
-  - "Don't just fix line 10. Check if this affects line 50." (Global awareness).
-- **Security:** "Review this code for SQL Injection vulnerabilities."
+### 2️⃣ Coding, Logic & Debugging
+- TDD (Test Driven Development) for AI, explaining bugs before fixing them, and security auditing.
 
-### 4.3 Data Extraction (JSON Mode)
-Turning unstructured text into structured data.
-- **Goal:** Convert email/PDF -> JSON.
-- **Technique:**
-  - **Schema Definition:** Provide the exact JSON schema (Pydantic model) in the prompt.
-  - **Few-Shot:** Show 1 example of "Text -> JSON".
-  - **Constraint:** "Output ONLY valid JSON. No markdown."
-- **Sentiment Analysis:** Don't ask "Is this positive?". Ask for a score (1-10) and *why*.
+### 3️⃣ Marketing, Content & Frameworks (PAS)
+- Using frameworks like PAS (Problem, Agitate, Solution) for conversion-optimized copy.
+
+### 4️⃣ Data Extraction & Cleaning
+- Converting unstructured logs/PDFs into valid JSON schemas.
+
+### 5️⃣ Structured Knowledge Work
+- Report generation and internal knowledge graph building.
+
+### 6️⃣ Conversational AI & Brand Voice
+- Creating persistent personas for customer-facing bots with strict escalation rules.
+
+### 7️⃣ Advanced Human-AI Interaction
+- Feedback loops where the AI asks clarifying questions before acting.
 
 ---
 
 ## 📈 Module 5: Evaluation & Optimization
 *How do you know if your prompt is "good"?*
 
-### 5.1 The "Vibe Check" vs Science
-Most people just "look at it" (Vibe Check). This is bad.
-- **Evaluation Science:**
-  - **LLM-as-a-Judge:** Use GPT-4 to grade the output of a smaller model (Llama-3). It correlates 80%+ with human raters.
-  - **Pairwise Ranking:** Show two outputs (A vs B) and ask "Which is better?". This is more reliable than giving a score (1-5).
-  - **Regression Testing:** "New prompt must pass all 50 previous test cases."
+### 1️⃣ Defining Success Metrics
+- Setting Targets for Accuracy, Latency, and Token Efficiency.
 
-### 5.2 Metrics that Matter
-- **Accuracy:** Did it get the right answer? (For Math/Code).
-- **Hallucination Rate:** Did it make things up? (For RAG).
-- **Relevance:** Did it answer the *user's* question?
-- **Conciseness:** Did it ramble? (Token cost).
+### 2️⃣ Evaluation Science (LLM-as-Judge)
+- Moving from "Vibes" to "Stats." Using GPT-4 to grade outputs or Pairwise Ranking (A vs B).
 
-### 5.3 Production Reliability
-Prompts "rot" over time because models change.
-- **Drift Detection:** Monitor the *average length* and *refusal rate* of your model's responses. If they change suddenly, the model was updated.
-- **Fallback Strategies:**
-  - "If GPT-4 times out, try Claude 3.5."
-  - "If the confidence score is low, say 'I don't know'."
+### 3️⃣ A/B Testing & Analysis
+- Statistical significance in comparing prompt versions.
+
+### 4️⃣ Production Reliability
+- Monitoring "Prompt Rot," Drift Detection, and Fallback strategies.
+
+### 5️⃣ Cost & Latency Optimization
+- Choosing the right model (Small vs Large) for the specific task budget.
 
 ---
 
 ## 🧩 Module 6: Advanced Prompting Techniques
-*The cutting edge of what is possible.*
+*The 13 Core Techniques for Experts.*
 
-### 6.1 Message Architecture
-- **System Prompt:** The "God Mode" instructions. Persistent, hidden, high authority.
-  - *"You are a helpful assistant who speaks in JSON."*
-- **User Prompt:** The current request.
-- **Assistant Prefill:** Starting the response for the model.
-  - *User:* "Write a poem."
-  - *Assistant:* "Here is a poem about nature:" (Forces the model to continue).
+### 1️⃣ System Prompts vs User Prompts
+- Defining identity vs. defining the task.
 
-### 6.2 Advanced Reasoning (Agents)
-- **Self-Consistency (CoT-SC):** Run the same prompt 5 times with `Temperature=0.7`. Take the *most common* answer. (Great for math).
-- **Tree of Thoughts (ToT):**
-  - Explore multiple "branches" of reasoning.
-  - "Idea 1: ... Idea 2: ... Idea 3: ..."
-  - Evaluate which path is best, then proceed.
-- **ReAct (Reason + Act):**
-  - The core of Agents.
-  - "Thought: I need to search Google. Action: Search(query). Observation: Results..."
-  - **Failure Mode:** "Planning Paralysis" (Thinking forever without acting). Fix: Force an action step.
-  - **The Loop:**
-    ```
-    Task -> [PLAN] -> [ACT] -> (Tool Output) -> [OBSERVE] -> [REFLECT] --(Loop)--> [PLAN]
-    ```
+### 2️⃣ Self-Consistency (SC-CoT) & 3️⃣ Tree of Thought (ToT)
+- Branching reasoning and majority-vote answer selection.
 
-### 6.3 Multimodal Prompting
-- **Vision:** "Look at this image."
-- **Grounding Errors:** Models hallucinate objects in images.
-  - *Fix:* Use **Set-of-Mark** (draw numbered boxes on the image before sending) to give the model specific coordinates to look at.
-- **Cross-Modal Hallucination:** When text conflicts with image ("The red car" text vs Blue Car image). Explicitly tell the model: *"Trust the image over the text."*
+### 4️⃣ ReAct Pattern & 5️⃣ Reflection
+- Think → Act → Observe loops and autonomous self-critique.
+- **Concise Example (For Notes):**
+  1. **Thought:** Need Microsoft CEO's name.
+  2. **Action:** `Search("Microsoft CEO")` → **Obs:** Satya Nadella.
+  3. **Thought:** Need his age.
+  4. **Action:** `Search("Satya Nadella age")` → **Obs:** 57 years.
+  5. **Response:** "Satya Nadella is 57 years old."
+
+### 6️⃣ Tool Use / Function Calling
+- Equipping LLMs with Search, Calculators, and DB access.
+
+### 7️⃣ Multi-Turn Conversation Design
+- Managing sliding context windows and summarization memory.
+
+### 8️⃣ Structured Output (JSON Mode)
+- Native JSON formatting for reliability.
+
+### 9️⃣ Model-Specific Prompting
+- Claude XML tags vs. GPT direct instruction styles.
+
+### 🔟 Agentic Prompting Patterns & 1️⃣1️⃣ Meta-Prompting
+- Planning Agents and allowing the LLM to write its own prompts.
+
+### 1️⃣2️⃣ Multimodal Prompting
+- Reasoning about images and handling vision grounding errors.
+
+### 1️⃣3️⃣ Prompt Compression
+- Token reduction strategies to save cost and increase speed.
 
 
 ---
@@ -226,69 +205,95 @@ Prompts "rot" over time because models change.
 ## 🤖 Module 7: Automated Prompt Engineering
 *Letting algorithms do the work.*
 
-### 7.1 Search Algorithms
-Why guess prompts? Algorithms can search for the "perfect phrasing" (gradient-free optimization).
-- **Genetic Algorithms:** Like evolution.
-  - *Generation 0:* "Solve this." (Score: 20%)
-  - *Generation 1:* "Think step by step." (Score: 40%)
-  - *Generation 2:* "Think step by step and be careful." (Score: 50%)
-  - *Result:* Automated optimization of prompt structure.
+### 1️⃣ Why Automate Prompts?
+- Overcoming human bias in prompt design.
 
-### 7.2 OPRO (Optimization by PROmpting)
-- **Concept:** Asking the LLM to improve its own prompt.
-- **Cycle:**
-  1.  LLM generates a prompt.
-  2.  Evaluator scores it (Accuracy).
-  3.  Meta-LLM sees the score and rewrites the prompt to improve it.
-  4.  Repeat until optimization plateau.
+### 2️⃣ Prompt Search Algorithms
+- Hill Climbing, Genetic Algorithms, and Gradient-free search.
 
-### 7.3 Prompt Distillation
-- **Problem:** Chain-of-Thought prompts are expensive (lots of tokens).
-- **Solution:** Teach a small model (Llama-3-8B) to mimic the output of a large model (GPT-4) *without* needing the long prompt.
-  - *Teacher:* "Think step by step... (500 tokens)... Answer: 42."
-  - *Student:* "Solve: Answer: 42." (Learns mapping directly).
+### 3️⃣ Evolutionary Prompt Optimization
+- OPRO (Optimization by PROmpting) cycle.
+
+### 4️⃣ Reinforcement Learning (RL)
+- Using reward models to fine-tune "soft prompt" prefixes.
+
+### 5️⃣ Prompt Distillation
+- Teaching smaller models to mimic CoT outputs using shorter prompts.
 
 ---
 
 ## ⚖️ Module 8: Prompting vs Fine-Tuning
-*The "Build vs Buy" Decision Framework.*
+*The "Build vs Buy" Strategic Decision.*
 
-### 8.1 The Trade-Offs
-- **Prompting:** Fast, cheap iteration, general purpose. Context limited.
-- **Fine-Tuning:** Slow, expensive, specialized style/format. Context unlimited (in weights).
-  - **Best For:** Fixing tone (branding), strict output formats (obscure JSON schemas), or specialized vocabularies (Medical/Legal).
+### 1️⃣ The Great Debate: Build or Buy?
+- Instructions (Generalist) vs. Weights (Specialist).
 
-### 8.2 LoRA (Low-Rank Adaptation)
-- **Analogy:** Instead of re-training the whole brain (Full Fine-Tuning), just add a small "adapter" (a Post-It note) on top.
-- **Efficiency:** Costs 1% of full fine-tuning.
-- **Hybrid Approach:** Use Prompting for *reasoning* and LoRA for *style/format*.
+### 2️⃣ When Prompting Fails
+- Instruction complexity, strict style adherence, and token latency.
 
-### 8.3 When to Switch? (Decision Framework)
-1.  **Start with Prompting:** It works for 90% of tasks.
-2.  **Add RAG:** If knowledge is missing.
-3.  **Add Tools:** If math/logic is weak.
-4.  **Fine-Tune (LoRA):** ONLY if you need consistent *style* or *latency/cost reduction* (replacing long prompts).
+### 3️⃣ Fine-Tuning & PEFT (LoRA)
+- Using Low-Rank Adaptation for efficient "Post-It note" style training.
+
+### 4️⃣ Cost–Quality Decision Framework
+- "Prompting → RAG → Tools → Fine-Tune" progression.
 
 ---
 
 ## 🔬 Module 9: Research-Level Prompting
 *Experimental techniques for future-proof AI.*
 
-### 9.1 Recursive Agents
-- **Self-Refining:** Agents that critique their own work in a loop.
-  - *Draft -> Critique -> Improve -> Critique -> ... -> Final.*
-- **Recursive Task Decomposition:**
-  - *Main Agent:* "Build App." -> Spawns *Coding Agent*.
-  - *Coding Agent:* "Write API." -> Spawns *Testing Agent*.
-  - *Testing Agent:* "Run Tests." -> Reports back up the chain.
+### 1️⃣ The Frontier: Self-Improvement
+- Agents that modify their own prompts in recursive self-correction loops.
 
-### 9.2 Neuro-Symbolic Prompting
-- **Concept:** Combining Neural Networks (Creative/Fuzzy) with Symbolic Logic (Math/Code/Fact).
-- **Example:** Don't ask ChatGPT to "calculate the orbital mechanics." Ask it to *write a Python script* (Symbolic) to calculate it, then interpret the results (Neural).
+### 2️⃣ Recursive Agents
+- Task decomposition where sub-agents spawn further specialized agents.
 
-### 9.3 The 1 Million Token Context
-- **Needle-in-a-Haystack:** As contexts grow to infinity (Gemini 1.5 Pro), prompt engineering shifts from "conciseness" to "information architecture" (organizing data so the model can find it).
-- **Alignment-Aware Design:** Writing prompts that include their own "Constitution" (Rules/Values) to prevent model misalignment or harmful outputs using Constitutional AI principles.
+### 3️⃣ Neuro-Symbolic Prompting
+- Combining Neural Networks (fuzzy logic) with Symbolic Logic (Python/Math code).
+
+### 4️⃣ 1M+ Context Windows
+- "Needle-in-a-Haystack" information architecture and summarization indexing.
+
+### 5️⃣ Alignment-Aware Design
+- Constitutional AI principles for safety and value adherence.
+
+---
+
+---
+
+## 🏆 Module 10: Mastery & Essential Missing Topics
+*The 25 critical techniques that bridge the gap from amateur to expert.*
+
+### 🛠️ Strategic Pattern Topics (1-8)
+1. **Prompt Chaining:** Breaking complex tasks into sequential steps (A → B → C).
+2. **Constraint Specification:** Using "HARD" (MUST) and "SOFT" (SHOULD) rules for strict adherence.
+3. **Error Recovery:** Explicit fallback instructions ("If info is missing, say X instead of guessing").
+4. **Classification & Categorization:** Defining boundaries, multi-label tagging, and confidence scoring (High/Low).
+5. **Summarization Patterns:** Extractive vs. Abstractive; Targeted (for CEOs vs. Devs) and Progressive layers.
+6. **Question Answering Design:** Closed-domain (context-bound) vs. Open-domain; Source attribution requirements.
+7. **Handling Ambiguity:** Clarification request loops ("I see 2 ways to interpret this, which do you mean?").
+8. **Example Selection (Few-Shot):** Diversity is key. The *last* example has the highest impact (Recency Bias).
+
+### ⚡ Optimization & Quality Topics (9-17)
+9. **Negative Prompting:** Explicit "DONTs" combined with positive "DOs".
+10. **Prompt Ensembling:** Running 3 versions of a prompt and taking a majority vote.
+11. **Iterative Refinement:** Draft → Critique → Revise cycles.
+12. **Specificity Levels:** Avoiding under-constrained (vague) or over-constrained (robotic) instructions.
+13. **Comparative & Ranking:** Structured evaluation across dimensions (Dimension A: X vs Y).
+14. **Bias Mitigation:** Neutral framing and explicit diversity instructions.
+15. **Context Management:** Summarizing history to fit in the window; Primacy/Recency effects.
+16. **In-Context Mechanics:** How LLMs "learn" pattern matching during the single turn.
+17. **Clarification Request Design:** When to ask vs. when to assume (Default Assumption Pattern).
+
+### 🏗️ Technical & Safety Topics (18-25)
+18. **Edge Case Handling:** Explicit rules for empty inputs, long texts, or invalid data.
+19. **Prompt Debugging:** Isolation, simplification, and reasoning logs.
+20. **Translation & Localization:** Cultural nuance vs. word-for-word conversion.
+21. **Cross-lingual Strategies:** Using English instructions for target-language outputs.
+22. **Persona Consistency:** Character characteristic maintenance over long turns.
+23. **Output Quality Indicators:** Requesting confidence levels and reasoning meta-data.
+24. **Prompt Templates:** Reusable variables `{VARIABLE}` for systematic workflows.
+25. **Input Sanitization:** Security checks for injection and data validation.
 
 ---
 

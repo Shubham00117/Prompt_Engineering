@@ -139,257 +139,248 @@
 
 <body>
     <div class="container">
-        <h1>🎨 Module 04: Real-World Domain Applications</h1>
+        <h1>💻 Module 04: Coding-Specific Domain Applications</h1>
 
         <!-- Table of Contents -->
         <div class="section">
-            <h2>📋 Vertical Solutions (Industry specific)</h2>
+            <h2>📋 Technical Solutions (Coding & SDET Specific)</h2>
             <div class="toc">
                 <ul>
-                    <li>1. Writing Assistance</li>
-                    <li>2. Professional Editing</li>
-                    <li>3. Style Matching</li>
-                    <li>4. Grammar & Proofing</li>
-                    <li>5. Marketing (PAS Framework)</li>
-                    <li>6. Ad Copy Advertising</li>
-                    <li>7. Social Media Variations</li>
-                    <li>8. Creative Fiction</li>
-                    <li>9. Story Plotting Templates</li>
-                    <li>10. Document Summarization</li>
-                    <li>11. Code & Technical Writing</li>
-                    <li>12. Customer Service Queries</li>
-                    <li>13. Brand Voice Monitoring</li>
+                    <li>1. Technical Documentation & Refactoring</li>
+                    <li>2. Communication & The PAS Framework</li>
+                    <li>3. Advanced Coding & Architecture</li>
+                    <li>4. Log Extraction & Data Munging</li>
+                    <li>5. System Analysis & Knowledge Work</li>
+                    <li>6. DevOps Bots & CLI Personas</li>
+                    <li>7. Human-AI Pair Programming</li>
                 </ul>
             </div>
         </div>
 
         <!-- Section 1: Writing -->
-        <div class="section">
-            <h2>1️⃣-4️⃣ Professional Writing & Editing</h2>
+        <div class="section" id="topic-1">
+            <h2>1️⃣ Technical Documentation & Refactoring</h2>
             <div class="explanation">
-                <strong>Core Idea:</strong> Prompting for writing isn't just about generation; it's about context-aware
-                improvement. A professional "Editor" prompt must demand a list of changes and reasoning.
+                <strong>Core Idea:</strong> Writing for code isn't just about syntax; it's about semantic clarity and
+                adherence to <strong>Style Guides</strong>. Use AI to match specific tones (e.g., informal Slack updates
+                vs. formal API Specs).
             </div>
             <div class="example-box">
-                <h4>PRO EDITOR TEMPLATE:</h4>
+                <h4>PRO DOC-STRING TEMPLATE:</h4>
                 <pre>
-Act as a professional senior editor. Improve the &lt;original&gt; text.
-&lt;original&gt;[Paste text here]&lt;/original&gt;
+Act as a Staff Engineer. Rewrite the &lt;original_function&gt; to improve readability.
+&lt;original_code&gt;[Paste code here]&lt;/original_code&gt;
 
 CRITERIA:
-- Active voice only.
-- 10th-grade reading level.
-- Remove all corporate jargon.
+- Follow PEP 8 (Python) or Clean Code (Java/JS) standards.
+- Add Google-style docstrings with Args, Returns, and Raises.
+- Rename variables for maximal semantic clarity.
 
 PROVIDE:
-1. Revised version.
-2. Bulleted list of specific edits made.
+1. Refactored code.
+2. Detailed explanation of architectural improvements.
                 </pre>
             </div>
         </div>
 
-        <!-- Section 11: Code -->
-        <div class="section" id="topic-11">
-            <h2>1️⃣1️⃣ Pro Coding & Debugging</h2>
+        <!-- Section 2: Marketing -> Technical Pitching -->
+        <div class="section" id="topic-2">
+            <h2>2️⃣ Technical Communication & The PAS Framework</h2>
             <div class="explanation">
-                <strong>Core Idea:</strong> "Write code" is a beginner prompt. Professional coding requires specifying
-                the stack, testing, and patterns.
+                <strong>Core Idea:</strong> Developers often fail to "sell" their fixes. Use the
+                **Problem-Agitation-Solution (PAS)** model to write high-impact Bug Reports and PR Descriptions.
+            </div>
+            <div class="diagram">
+                <pre>
+PROBLEM: "Race condition in Login handler."
+   ↓
+AGITATION: "Causes 5% of users to see blank pages; breaks mobile auth."
+   ↓
+SOLUTION: "Implement Mutex locks + Retry logic in the DB layer."
+                </pre>
+            </div>
+            <div class="key-concept">
+                <strong>💡 Key Insight:</strong> For Stakeholders vs Developers, change the **technical depth**. Use a
+                prompt to: "Rewrite this PR summary for a Product Manager (benefit-focused) and a Senior Dev
+                (logic-focused)."
+            </div>
+        </div>
+
+        <!-- Section 3: Coding -->
+        <div class="section" id="topic-3">
+            <h2>3️⃣ Advanced Coding & Architecture</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Moving beyond "hello world." Professional prompting specifies Design
+                Patterns, SOLID principles, and Testability.
             </div>
             <div class="grid-2">
                 <div class="example-box">
-                    <h4>🛠️ Generation Prompt</h4>
-                    "Generate a Python FastAPI endpoint for user login.
-                    <br>- Use Pydantic v2 models.
-                    <br>- Implement rate limiting (Redis).
-                    <br>- Include docstrings (Google style)."
+                    <h4>🏗️ Architecture Prompt</h4>
+                    "Design a Scalable Page Object Model (POM) for a React App.
+                    <br>- Use TypeScript and Playwright.
+                    <br>- Include BasePage abstract class.
+                    <br>- Implement 'Fluent Interface' pattern."
                 </div>
                 <div class="example-box">
-                    <h4>🐞 Debugging Prompt</h4>
-                    "Here is a traceback &lt;log&gt;...&lt;/log&gt;.
-                    <br>- Identify the root cause.
-                    <br>- Propose 3 potential fixes.
-                    <br>- Rate them by 'Impact Risk'."
+                    <h4>🐞 Complex Debugging</h4>
+                    "Here is a Kubernetes log + Redis Trace &lt;log&gt;...&lt;/log&gt;.
+                    <br>- Find the bottleneck.
+                    <br>- Suggest 3 scaling strategies.
+                    <br>- Analyze memory leak potential."
                 </div>
             </div>
             <div class="key-concept">
-                <strong>💡 Unit Test Generation:</strong>
-                "For the code above, generate 5 Pytest cases covering: 1. Happy path, 2. Null input, 3. SQL Injection
-                attempt, 4. Timeout."
+                <strong>💡 Precision Testing & TDD:</strong>
+                "Apply the **TDD (Test Driven Development)** pattern: Given this feature requirement &lt;req&gt;, first
+                generate 5 failing test cases. Then, generate the simplest code that passes these tests."
             </div>
         </div>
 
-        <!-- Section 5: Marketing -->
-        <div class="section">
-            <h2>5️⃣-7️⃣ Marketing & The PAS Framework</h2>
+        <!-- Section 4: Data Extraction -->
+        <div class="section" id="topic-4">
+            <h2>4️⃣ Log Extraction & Data Munging</h2>
             <div class="explanation">
-                <strong>Core Idea:</strong> Higher conversions come from structured psychology. Use the
-                **Problem-Agitation-Solution (PAS)** model for high-impact copy.
+                <strong>Core Idea:</strong> Converting unstructured logs (Splunk, ELK) or JSON blobs into structured
+                reports or Test Data.
             </div>
             <div class="diagram">
                 <pre>
-PROBLEM: "Tired of slow builds?"
+INPUT: "2024-05-10 14:02:01 ERROR Auth [User: 402] Timeout after 5000ms"
    ↓
-AGITATION: "Wasted hours mean lost revenue & missed deadlines."
-   ↓
-SOLUTION: "Our CI/CD tool deploys in seconds. Guaranteed."
-                </pre>
-            </div>
-            <div class="key-concept">
-                <strong>💡 Key Insight:</strong> For Social Media (Twitter/X vs LinkedIn), don't just "rewrite." Tell
-                the AI to change the **Angle** and **Length** (e.g., "Punchy for X, Insightful for LinkedIn").
-            </div>
-        </div>
-
-        <!-- Section 14: Data Extraction -->
-        <div class="section" id="topic-14">
-            <h2>1️⃣4️⃣ Data Extraction & Cleaning</h2>
-            <div class="explanation">
-                <strong>Core Idea:</strong> Converting unstructured text (emails, PDFs) into structured data (JSON/SQL).
-            </div>
-            <div class="diagram">
-                <pre>
-INPUT: "Meeting with Sarah on Friday at 2pm regarding Q4 budget."
-   ↓
-EXTRACTION PROMPT: "Extract entities: Person, Time, Topic."
+EXTRACTION PROMPT: "Parse logs into CSV: Date, Level, Component, Duration."
    ↓
 OUTPUT:
-{
-  "person": "Sarah",
-  "time": "Friday 2pm",
-  "topic": "Q4 budget"
-}
+"Date,Level,Component,Duration"
+"2024-05-10,ERROR,Auth,5000"
                 </pre>
             </div>
             <div class="warning-box">
-                <h4>Sentiment Analysis</h4>
-                Don't just ask "Is this positive?". Ask for "Sentiment Score (-1 to +1) and Key Drivers".
+                <h4>API Mocks</h4>
+                Don't just ask for "test data." Ask to: "Convert this SQL Schema into a JSON Mock response for a GET
+                /users endpoint."
             </div>
         </div>
 
-        <!-- Section 15: Structured Knowledge -->
-        <div class="section" id="topic-15">
-            <h2>1️⃣5️⃣ Structured Knowledge Work</h2>
+        <!-- Section 5: Structured Knowledge -->
+        <div class="section" id="topic-5">
+            <h2>5️⃣ System Analysis & Knowledge Work</h2>
             <div class="explanation">
-                <strong>Core Idea:</strong> Automating high-value white-collar tasks like report generation and
-                knowledge graphs.
+                <strong>Core Idea:</strong> Automating architectural reviews, dependency audits, and system design
+                documentation.
             </div>
             <table class="table">
                 <tr>
-                    <th>Task</th>
-                    <th>Strategy</th>
+                    <th>Engineering Task</th>
+                    <th>Prompt Strategy</th>
                 </tr>
                 <tr>
-                    <td><strong>Knowledge Graphs</strong></td>
-                    <td>"Extract all relationships: (Entity A) -> [Relation] -> (Entity B)."</td>
+                    <td><strong>Dependency Mapping</strong></td>
+                    <td>"Analyze package.json. Highlight deprecated libs and security risks."</td>
                 </tr>
                 <tr>
-                    <td><strong>Long-Doc QA</strong></td>
-                    <td>"Answer based ONLY on the provided PDF. Cite page numbers."</td>
+                    <td><strong>Tech Debt Audit</strong></td>
+                    <td>"Identify circular dependencies and 'God Objects' in these 10 files."</td>
                 </tr>
                 <tr>
-                    <td><strong>Reports</strong></td>
-                    <td>"Synthesize these 5 memos into a 1-page Executive Summary. Highlight risks."</td>
+                    <td><strong>System Design</strong></td>
+                    <td>"Synthesize these 3 RFCs into a High-Level Design (HLD) document."</td>
                 </tr>
             </table>
         </div>
 
-        <!-- Section 12: Customer Service -->
-        <div class="section">
-            <h2>1️⃣2️⃣-1️⃣3️⃣ Conversational AI & Brand Voice</h2>
+        <!-- Section 6: Customer Service -> Internal Tooling -->
+        <div class="section" id="topic-6">
+            <h2>6️⃣ DevOps Bots & CLI Personas</h2>
             <div class="explanation">
-                <strong>Core Idea:</strong> Building a brand bot requires a "Personality Matrix" and strict "Escalation
-                Rules."
+                <strong>Core Idea:</strong> Building internal developer tools requires a "System Persona" that provides
+                safe, accurate technical guidance.
             </div>
             <table class="table">
                 <tr>
-                    <th>Component</th>
-                    <th>Example Configuration</th>
+                    <th>Bot Component</th>
+                    <th>Developer Tool Configuration</th>
                 </tr>
                 <tr>
                     <td><strong>ID</strong></td>
-                    <td>"Name: Alex, Role: Support Specialist."</td>
+                    <td>"Name: SRE-Lite, Role: Deployment Assistant."</td>
                 </tr>
                 <tr>
                     <td><strong>Tone</strong></td>
-                    <td>"Friendly, patient, warm, not corporate."</td>
+                    <td>"Concise, technical, action-oriented (no fluff)."</td>
                 </tr>
                 <tr>
-                    <td><strong>Limits</strong></td>
-                    <td>"Never process payments. Redirect to portal."</td>
+                    <td><strong>Safety Rails</strong></td>
+                    <td>"Never run 'rm -rf' or delete DBs. Ask for MFA."</td>
                 </tr>
                 <tr>
-                    <td><strong>Escalation</strong></td>
-                    <td>"If user mentions legal or supervisor, hand off."</td>
+                    <td><strong>Context</strong></td>
+                    <td>"Know the staging URLs and K8s namespace rules."</td>
                 </tr>
             </table>
             <div class="warning-box">
-                <h4>🛡️ High-Stakes Domains (Legal/Medical)</h4>
-                <strong>Rule:</strong> AI should NEVER provide advice. It provides <em>information</em>.
-                <br><em>Prompt Pattern:</em> "You are a legal researcher assistant. Provide a summary of the law.
-                Include a disclaimer that this is NOT legal advice and the user should consult a human attorney."
-            </div>
-
-            <div class="key-concept">
-                <strong>💡 Localization vs. Translation</strong><br>
-                LLMs excel at Localization: adapting text to cultural norms. Don't just ask to "Translate to Spanish";
-                ask to "Rewrite this for a technical audience in Mexico City" to capture regional slang and tone.
+                <h4>🛡️ Security Domain (AppSec)</h4>
+                <strong>Rule:</strong> Never share production secrets.
+                <br><em>Prompt Pattern:</em> "You are a Security Auditor. Scan this code for Hardcoded Secrets and SQLi.
+                If found, provide the CWE ID but do not leak the actual ENV keys."
             </div>
         </div>
 
-        <!-- Section 16: Human-AI Interaction -->
-        <div class="section" id="topic-16">
-            <h2>1️⃣6️⃣ Advanced Human-AI Interaction</h2>
+        <!-- Section 7: Human-AI Interaction -->
+        <div class="section" id="topic-7">
+            <h2>7️⃣ Human-AI Pair Programming</h2>
             <div class="explanation">
-                <strong>Core Idea:</strong> Making AI feel like a partner, not a tool.
+                <strong>Core Idea:</strong> Maximizing the 'Coding Assistant' (GitHub Copilot, Cursor) by managing
+                context and feedback loops.
             </div>
             <div class="grid-2">
                 <div class="visual-item">
-                    <strong>🧠 Memory Design</strong>
+                    <strong>🧠 Context Management</strong>
                     <br>
-                    <strong>Short-Term:</strong> "What did I just say?"
+                    <strong>Local Context:</strong> "Current file + Imports."
                     <br>
-                    <strong>Long-Term:</strong> "Remember I prefer Python." (Store this in a vector DB/User Profile).
+                    <strong>Project Context:</strong> "Use the project's .prettierrc and ESLint rules."
                 </div>
                 <div class="visual-item">
-                    <strong>🎭 Personalization</strong>
+                    <strong>🎭 Iterative Review</strong>
                     <br>
-                    "Adapt your tone to the user. If they are brief, be brief. If they are chatty, match their energy."
+                    "Review my work. If I'm over-engineering, suggest a simpler approach using built-in libraries."
                 </div>
             </div>
             <div class="key-concept">
-                <strong>💡 Tone Alignment:</strong>
-                Track the user's emotion. If they are angry, switch to "Empathetic/Professional". If they are happy,
-                switch to "Casual/Enthusiastic".
+                <strong>💡 The "Clarifying Question" Loop:</strong>
+                Force the AI to be a partner: "You are an SDET Lead. I will give you a task. Before you write any code,
+                you **must ask me 3 clarifying questions** about edge cases, environment, or performance constraints."
             </div>
         </div>
 
         <!-- Summary Section -->
         <div class="section">
-            <h2>📚 Quick Reference Summary</h2>
+            <h2>📚 Engineering Quick Reference</h2>
             <table class="table">
                 <tr>
-                    <th>Domain</th>
+                    <th>Coding Domain</th>
                     <th>Winning Formula</th>
                 </tr>
                 <tr>
-                    <td><strong>Creative</strong></td>
-                    <td>Sensory details + "No 'Once upon a time'."</td>
+                    <td><strong>Refactoring</strong></td>
+                    <td>Clean Code Principles + Variable Semantic mapping.</td>
                 </tr>
                 <tr>
-                    <td><strong>Technical</strong></td>
-                    <td>FastAPI/Pydantic context + PEP 8 rules.</td>
+                    <td><strong>Automation</strong></td>
+                    <td>Design Patterns (POM/Factory) + Mocking context.</td>
                 </tr>
                 <tr>
-                    <td><strong>Marketing</strong></td>
-                    <td>PAS Framework + AIDA psychological model.</td>
+                    <td><strong>Log Analysis</strong></td>
+                    <td>Regex generation + CSV/JSON transformation.</td>
                 </tr>
                 <tr>
-                    <td><strong>Ethics</strong></td>
-                    <td>Transparency, Accuracy, and Privacy filters.</td>
+                    <td><strong>Pairing</strong></td>
+                    <td>Context Injection + Big O Complexity checks.</td>
                 </tr>
             </table>
             <div class="summary-box">
-                💡 Domain applications transform raw AI into a specialized tool for your specific business niche.
+                💡 Mastery of domain-specific coding prompts turns an LLM from a simple snippet generator into a virtual
+                Staff Engineer.
             </div>
         </div>
 

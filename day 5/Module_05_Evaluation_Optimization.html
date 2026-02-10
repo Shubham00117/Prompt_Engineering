@@ -155,25 +155,17 @@
             <div class="toc">
                 <ul>
                     <li>1. Defining Success Metrics</li>
-                    <li>2. Accuracy vs Relevance</li>
-                    <li>3. Latency & Token Efficiency</li>
-                    <li>4. A/B Testing Prompts</li>
-                    <li>5. Human-in-the-loop Evaluation</li>
-                    <li>6. Model Variability Handling</li>
-                    <li>7. Gold Datasets & Eval Sets</li>
-                    <li>8. Iterative Improvement Cycle</li>
-                    <li>9. Analyzing Failure Modes</li>
-                    <li>10. Hallucination Detection</li>
-                    <li>11. Prompt Versioning (Git style)</li>
-                    <li>12. Cost & Latency Budgets</li>
-                    <li>13. Optimization Decisions</li>
+                    <li>2. Evaluation Science</li>
+                    <li>3. A/B Testing & Analysis</li>
+                    <li>4. Production Reliability</li>
+                    <li>5. Cost & Latency Optimization</li>
                 </ul>
             </div>
         </div>
 
         <!-- Section 1: Metrics -->
-        <div class="section">
-            <h2>1️⃣-3️⃣ Defining Success Metrics</h2>
+        <div class="section" id="topic-1">
+            <h2>1️⃣ Defining Success Metrics</h2>
             <div class="explanation">
                 <strong>Core Idea:</strong> Before you optimize a prompt, you must define exactly what "Good" looks
                 like. We use **Primary** (critical), **Secondary** (important), and **Tertiary** (nice-to-have) metrics.
@@ -192,27 +184,24 @@
                 <tr>
                     <td><strong>Consistency</strong></td>
                     <td>Low variance in output style.</td>
-                    <td>
-                        <10% variance</td>
+                    <td>&lt;10% variance</td>
                 </tr>
                 <tr>
                     <td><strong>Latency</strong></td>
                     <td>Time to First Token (TTFT).</td>
-                    <td>
-                        <2.0 seconds</td>
+                    <td>&lt;2.0 seconds</td>
                 </tr>
                 <tr>
                     <td><strong>Token Eff.</strong></td>
                     <td>Minimizing billable tokens.</td>
-                    <td>
-                        <500 per response</td>
+                    <td>&lt;500 per response</td>
                 </tr>
             </table>
         </div>
 
-        <!-- Section 2b: Evaluation Science -->
-        <div class="section" id="topic-2b">
-            <h2>2️⃣b Evaluation Science (Deep Dive)</h2>
+        <!-- Section 2: Evaluation Science -->
+        <div class="section" id="topic-2">
+            <h2>2️⃣ Evaluation Science</h2>
             <div class="explanation">
                 <strong>Core Idea:</strong> Moving from "Vibes-based" evaluation to "Stats-based" evaluation.
             </div>
@@ -239,9 +228,9 @@
             </table>
         </div>
 
-        <!-- Section 4: A/B Testing -->
-        <div class="section">
-            <h2>4️⃣-5️⃣ A/B Testing & Analysis</h2>
+        <!-- Section 3: A/B Testing -->
+        <div class="section" id="topic-3">
+            <h2>3️⃣ A/B Testing & Analysis</h2>
             <div class="explanation">
                 <strong>Core Idea:</strong> Never assume a prompt is better without data. Compare Version A (Control)
                 against Version B (Test) using a statistically significant sample (n=100+).
@@ -265,9 +254,9 @@ WINNER: Prompt B (+13.2% Improvement)
             </div>
         </div>
 
-        <!-- Section 9b: Production Reliability -->
-        <div class="section" id="topic-9b">
-            <h2>9️⃣b Production Reliability</h2>
+        <!-- Section 4: Production Reliability -->
+        <div class="section" id="topic-4">
+            <h2>4️⃣ Production Reliability</h2>
             <div class="explanation">
                 <strong>Core Idea:</strong> Prompts rot over time. Model updates, data drift, and user behavior changes
                 require monitoring.
@@ -298,9 +287,9 @@ WINNER: Prompt B (+13.2% Improvement)
             </div>
         </div>
 
-        <!-- Section 12: Cost -->
-        <div class="section">
-            <h2>1️⃣2️⃣-1️⃣3️⃣ Cost & Latency Optimization</h2>
+        <!-- Section 5: Cost & Latency -->
+        <div class="section" id="topic-5">
+            <h2>5️⃣ Cost & Latency Optimization</h2>
             <div class="explanation">
                 <strong>Core Idea:</strong> The most expensive model (o1/GPT-4o) isn't always the best Choice.
                 Optimization is about finding the point where **Price meets Performance**.

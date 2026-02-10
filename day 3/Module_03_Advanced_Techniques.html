@@ -190,6 +190,67 @@
                 columns: 1;
             }
         }
+
+        .pipeline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 0;
+            padding: 30px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 15px;
+            border: 2px solid #667eea;
+        }
+
+        .pipe-step {
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-weight: bold;
+            color: white;
+            font-size: 0.9em;
+            text-align: center;
+            min-width: 130px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .pipe-step:hover {
+            transform: translateY(-5px);
+        }
+
+        .pipe-step.blue {
+            background: linear-gradient(135deg, #2196f3, #00bcd4);
+        }
+
+        .pipe-step.green {
+            background: linear-gradient(135deg, #4caf50, #8bc34a);
+        }
+
+        .pipe-step.purple {
+            background: linear-gradient(135deg, #9c27b0, #e91e63);
+        }
+
+        .pipe-step.indigo {
+            background: linear-gradient(135deg, #3f51b5, #673ab7);
+        }
+
+        .pipe-arrow {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+
+        @media (max-width: 768px) {
+            .pipeline {
+                flex-direction: column;
+            }
+
+            .pipe-arrow {
+                transform: rotate(90deg);
+            }
+        }
     </style>
 </head>
 
@@ -202,35 +263,47 @@
             <h2>📋 Modern AI Architectures</h2>
             <div class="toc">
                 <ul>
-                    <li>1. Prompt Chaining</li>
-                    <li>2. Task Decomposition</li>
-                    <li>3. Sequential Workflows</li>
-                    <li>4. Information Extraction</li>
-                    <li>5. Context Management</li>
-                    <li>6. Explicit State Passing</li>
-                    <li>7. Summary Carryover</li>
-                    <li>8. RAG Fundamentals</li>
-                    <li>9. Citation & Attribution</li>
-                    <li>10. Long Doc Handling</li>
-                    <li>11. Defensive Design</li>
-                    <li>12. Prompt Injection</li>
-                    <li>13. Edge Case Handling</li>
+                    <li>1. Prompt Chaining & Decomposition</li>
+                    <li>2. Advanced Reasoning Patterns</li>
+                    <li>3. RAG Fundamentals</li>
+                    <li>4. Deep RAG Strategies</li>
+                    <li>5. Defensive Design & Safety</li>
+                    <li>6. Edge Case Handling</li>
                 </ul>
             </div>
         </div>
 
         <!-- Topic 1: Prompt Chaining -->
         <div class="section" id="topic-1">
-            <h2>1️⃣-2️⃣ Prompt Chaining & Decomposition</h2>
+            <h2>1️⃣ Prompt Chaining & Decomposition</h2>
             <div class="explanation">
-                <strong>Core Idea:</strong> Break "Monolithic" tasks into a series of smaller, verifiable steps.
-                Chaining ensures that output from Step A becomes context for Step B.
+                <strong>Core Idea:</strong> Transitioning from <strong>Monolithic Instruction</strong> to
+                <strong>Modular Pipelines</strong>. By decomposing complex tasks into atomic, verifiable chains, we
+                minimize context drift and maximize deterministic reliability.
+            </div>
+
+            <div class="grid-2">
+                <div class="visual-item" style="border-color: #9c27b0;">
+                    <strong>⛓️ Prompt Chaining</strong><br>
+                    The sequential linking of LLM prompts where the output of one stage is passed as the starting point
+                    (context) for the next stage.
+                </div>
+                <div class="visual-item" style="border-color: #9c27b0;">
+                    <strong>🧩 Decomposition</strong><br>
+                    The logical breakdown of a single complex request into multiple simpler, "atomic" sub-tasks that are
+                    easier for the model to handle without losing focus.
+                </div>
             </div>
             <div class="diagram">
-                <pre>
-MONOLITHIC: [Prompt] → [Large Complex Output] (Risky)
+                <pre style="color: #2b1055;">
+🛑 <strong>MONOLITHIC (Single-Turn Risk)</strong>
+[ Complex Prompt ] ━━━━━━━━━━━━▶ [ Single Massive Generation ]
+                                     (⚠️ High Hallucination Risk)
 
-CHAINED:    [P1: Extract] → [P2: Analyze] → [P3: Format] (Reliable)
+✅ <strong>CHAINED (Atomic Reliability)</strong>
+[ P1: Extract ] ──▶ [ P2: Analyze ] ──▶ [ P3: Format ]
+      │                 │                 │
+      └───── VERIFY ────┴───── AUDIT ─────┘──▶ 🚀 Reliable Output
                 </pre>
             </div>
             <div class="grid-2">
@@ -256,70 +329,179 @@ CHAINED:    [P1: Extract] → [P2: Analyze] → [P3: Format] (Reliable)
             </div>
         </div>
 
-        <!-- Topic 2b: Advanced Reasoning Control -->
-        <div class="section" id="topic-2b">
-            <h2>2️⃣b Advanced Reasoning Control</h2>
+        <!-- Topic 2: Advanced Reasoning -->
+        <div class="section" id="topic-2">
+            <h2>2️⃣ Advanced Reasoning Patterns</h2>
             <div class="explanation">
-                <strong>Core Idea:</strong> Reasoning isn't just "step-by-step". It's a spectrum of control.
+                <strong>Core Idea:</strong> Transition from <strong>Intuitive Prediction</strong> to <strong>Structured
+                    Logic</strong> to eliminate "Fast Thinking" errors in high-stakes tasks.
             </div>
+
+            <div class="grid-2">
+                <div class="visual-item" style="border-bottom: 4px solid #ff9800;">
+                    <strong>❌ Fast Thinking</strong><br>
+                    Pattern-based guessing. High inaccuracy in math/logic.
+                </div>
+                <div class="visual-item" style="border-bottom: 4px solid #4caf50;">
+                    <strong>✅ Slow Thinking</strong><br>
+                    Systematic derivation. High reliability via grounding.
+                </div>
+            </div>
+
             <table class="table">
-                <tr>
-                    <th>Technique</th>
-                    <th>How It Works</th>
+                <tr style="background: #6a11cb; color: white;">
+                    <th>Pattern</th>
+                    <th>How it Works</th>
+                    <th>Use Case</th>
                 </tr>
                 <tr>
-                    <td><strong>Program-of-Thought (PoT)</strong></td>
-                    <td>Delegate math to code. Instead of guessing <code>132 * 41</code>, the LLM writes
-                        <code>print(132 * 41)</code> and runs it.</td>
+                    <td><strong>Least-to-Most</strong></td>
+                    <td>Solve sub-problems in order of difficulty.</td>
+                    <td>Complex logic.</td>
                 </tr>
                 <tr>
-                    <td><strong>Hidden CoT</strong></td>
-                    <td>Hide the messy "thinking" steps from the user. Only show the final answer. (Crucial for clean
-                        UX).</td>
+                    <td><strong>PoT</strong></td>
+                    <td>Write Python code to solve math problems.</td>
+                    <td>Precise math.</td>
                 </tr>
                 <tr>
-                    <td><strong>Multi-Agent Debate</strong></td>
-                    <td>Have Agent A propose an idea, and Agent B critique it. The conflict forces better reasoning.
-                    </td>
+                    <td><strong>MAD (Debate)</strong></td>
+                    <td>Pro vs. Con agents critique each other.</td>
+                    <td>Critical analysis.</td>
                 </tr>
             </table>
-        </div>
 
-        <!-- Topic 8: RAG -->
-        <div class="section" id="topic-8">
-            <h2>8️⃣ Retrieval-Augmented Generation (RAG)</h2>
-            <div class="explanation">
-                <strong>Core Idea:</strong> Combines LLM reasoning with external knowledge (PDFs, DBs, Docs). The LLM
-                only answers based on "Retrieved Context," reducing hallucinations.
-            </div>
-            <div class="example-box">
-                <h4>Basic RAG Pattern:</h4>
-                <pre>
-Use ONLY the &lt;context&gt; to answer:
-&lt;context&gt;
-[Document 1: Policy Snippet]
-[Document 2: Procedure Snippet]
-&lt;/context&gt;
-Question: [User Query]
+            <div class="diagram" style="padding: 15px; background: #fdfbff; border: 1px solid #6a11cb;">
+                <pre style="color: #6a11cb; font-size: 0.9em; margin: 0; white-space: pre-wrap;">
+🔄 <strong>DEBATE FLOW:</strong> [👤 USER] → [🤖 PROPOSER] ⬌ [🛡️ CONTRARIAN] → [⚖️ FINAL JUDGE]
                 </pre>
             </div>
-            <div class="key-concept">
-                <strong>💡 Key Insight:</strong> RAG changes the LLM's role from a "Knowledge Base" (often outdated) to
-                a "Reasoning Engine" (always current).
+
+            <div
+                style="margin-top: 15px; font-size: 0.95em; line-height: 1.6; border-left: 3px solid #6a11cb; padding-left: 15px; margin-bottom: 20px;">
+                <p>👤 <strong>USER:</strong> Provides the initial complex request or problem statement.</p>
+                <p>🤖 <strong>PROPOSER:</strong> Generates the first comprehensive solution with supporting facts.</p>
+                <p>🛡️ <strong>CONTRARIAN:</strong> Critical agent that identifies errors, biases, and logical flaws.
+                </p>
+                <p>⚖️ <strong>FINAL JUDGE:</strong> Reviews the debate to deliver the most accurate and balanced final
+                    result.</p>
             </div>
-            <div class="warning-box">
-                <h4>⚙️ RAG Logic: Chunking & Embeddings</h4>
-                To fit data into the context window, we break docs into <strong>Chunks</strong> (e.g., 500 characters).
-                We convert these into <strong>Embeddings</strong> (vectors) to perform a "Semantic Search" and retrieve
-                only the most relevant pieces.
+
+            <div class="example-box" style="border-color: #f44336; background: #fffde7; padding: 20px;">
+                <h4 style="color: #d32f2f; margin-bottom: 10px;">🚨 Reasoning MUST-DOs</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li>🔹 <strong>Thought Masking:</strong> AI thinks privately first and shows only the clean final
+                        answer.</li>
+                    <li>🔹 <strong>Enforce Steps:</strong> AI solves problems in a fixed order—Variables → Formula →
+                        Result.</li>
+                    <li>🔹 <strong>Trigger Review:</strong> AI checks and corrects its answer before giving the final
+                        output.</li>
+                    <li>🔹 <strong>Ground Claims:</strong> Every step must come directly from the given input data, not
+                        guesses.</li>
+                </ul>
+            </div>
+
+
+        </div>
+
+        <!-- Topic 3: Retrieval-Augmented Generation (RAG) -->
+        <div class="section" id="topic-3">
+            <h2>3️⃣ Retrieval-Augmented Generation (RAG)</h2>
+            <div class="explanation">
+                <strong>Core Idea:</strong> Separating <strong>Knowledge from Reasoning</strong>. RAG changes the LLM's
+                role from a "Knowledge Storage" (often outdated) to a "Reasoning Engine" that works on fresh, external
+                data.
+            </div>
+
+            <div class="grid-2">
+                <div class="visual-item" style="background: #e3f2fd; border-bottom: 4px solid #2196f3;">
+                    <strong>🧠 Reasoning Engine (LLM)</strong><br>
+                    Does the logical processing and writing.
+                </div>
+                <div class="visual-item" style="background: #e8f5e9; border-bottom: 4px solid #4caf50;">
+                    <strong>📄 Knowledge Base (Source Data)</strong><br>
+                    Provides the latest, real-world facts.
+                </div>
+            </div>
+
+            <div class="example-box">
+                <h4>🛠️ Basic RAG Pattern (How it Works)</h4>
+                <ol style="padding-left: 20px; line-height: 1.8;">
+                    <li><strong>Question:</strong> User asks a question.</li>
+                    <li><strong>Retrieval:</strong> System searches a database for relevant document pieces.</li>
+                    <li><strong>Context Inject:</strong> Top pieces are inserted into a <code>&lt;context&gt;</code>
+                        block.</li>
+                    <li><strong>Instruction:</strong> LLM is told: <em>"Answer using ONLY this context."</em></li>
+                    <li><strong>Generation:</strong> LLM reads facts and writes the final answer.</li>
+                </ol>
+            </div>
+
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>� Without RAG</strong><br>
+                    LLM relies on memory. Risk of outdated data and hallucinations.
+                </div>
+                <div class="visual-item">
+                    <strong>✅ With RAG</strong><br>
+                    LLM relies on fetched context. Facts are always up-to-date and grounded.
+                </div>
+            </div>
+
+            <div class="key-concept" style="border-left-color: #ff9800; background: #fff3e0;">
+                <strong>⚙️ The Mechanism: Chunking & Embeddings</strong>
+                <p style="margin-top: 10px;">
+                    🔹 <strong>Chunking:</strong> Breaking large docs into small "atomic" pieces (e.g., 500 characters)
+                    so they fit inside the AI's limited focus window.
+                </p>
+                <p>
+                    🔹 <strong>Embeddings:</strong> Converting text into <strong>Vectors</strong> (number lists). This
+                    allows "Semantic Search"—finding things by <em>meaning</em> (e.g., matching "leave policy" with
+                    "vacation rules").
+                </p>
+            </div>
+
+            <div class="pipeline">
+                <div class="pipe-step blue">📄 Documents</div>
+                <div class="pipe-arrow">➔</div>
+                <div class="pipe-step blue">🧩 Chunking</div>
+                <div class="pipe-arrow">➔</div>
+                <div class="pipe-step blue">🔢 Embeddings</div>
+                <div class="pipe-arrow">➔</div>
+                <div class="pipe-step green">🗄️ Vector Storage</div>
+                <div class="pipe-arrow">➔</div>
+                <div class="pipe-step purple">🔍 Semantic Search</div>
+                <div class="pipe-arrow">➔</div>
+                <div class="pipe-step purple">📥 Retrieved Context</div>
+                <div class="pipe-arrow">➔</div>
+                <div class="pipe-step indigo">🧠 LLM Reasoning</div>
+                <div class="pipe-arrow">➔</div>
+                <div class="pipe-step indigo">🚀 Final Answer</div>
+            </div>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <img src="rag_architecture_diagram.png" alt="RAG Architecture Diagram"
+                    style="max-width: 100%; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); border: 4px solid #667eea;">
+                <p style="color: #667eea; font-weight: bold; margin-top: 15px; font-size: 1.1em;">🎨 Visual: The
+                    High-Tech RAG Lifecycle Architecture</p>
+            </div>
+
+            <div class="summary-box">
+                🔄 <strong>RAG Mission:</strong> Accurate AI through fresh knowledge + reasoning focus.
+            </div>
+            <div class="key-concept" style="text-align: center; border: 2px solid #667eea;">
+                📌 <strong>Final One-Line Understanding:</strong> RAG makes AI accurate by giving it fresh external
+                knowledge and letting it only focus on <strong>reasoning</strong> instead of
+                <strong>memorization</strong>.
             </div>
         </div>
 
-        <!-- Topic 8b: Deep RAG Strategies -->
-        <div class="section" id="topic-8b">
-            <h2>8️⃣b Deep RAG Strategies (Beyond Basic Retrieval)</h2>
+        <!-- Topic 4: Deep RAG -->
+        <div class="section" id="topic-4">
+            <h2>4️⃣ Deep RAG Strategies</h2>
             <div class="explanation">
-                <strong>Core Idea:</strong> Simple vector search fails on vague questions. You need smarter retrieval.
+                <strong>Core Idea:</strong> Moving from <strong>Keyword Hits</strong> to <strong>Intent
+                    Retrieval</strong>. Advanced RAG uses Query Rewriting and Hybrid Search to bridge the gap between
+                user ambiguity and document precision.
             </div>
             <div class="grid-2">
                 <div class="visual-item">
@@ -346,12 +528,13 @@ Question: [User Query]
             </div>
         </div>
 
-        <!-- Topic 11-12: Safety -->
-        <div class="section" id="topic-11">
-            <h2>1️⃣1️⃣-1️⃣2️⃣ Defensive Design & Safety</h2>
+        <!-- Topic 5: Safety -->
+        <div class="section" id="topic-5">
+            <h2>5️⃣ Defensive Design & Safety</h2>
             <div class="explanation">
-                <strong>Core Idea:</strong> Protecting your system from prompt injection and adversarial attacks where
-                users try to hijack the AI's instructions.
+                <strong>Core Idea:</strong> Implementing <strong>Instructional Sovereignty</strong>. Defensive design
+                treats user input as untrusted data, using delimiters and validation gates to prevent system prompt
+                "hijacking."
             </div>
             <div class="warning-box">
                 <h4>🛡️ Defense Strategies:</h4>
@@ -371,11 +554,13 @@ Question: [User Query]
             </div>
         </div>
 
-        <!-- Topic 13: Edge Case Handling -->
-        <div class="section" id="topic-13">
-            <h2>1️⃣3️⃣ Edge Case Handling</h2>
+        <!-- Topic 6: Edge Case Handling -->
+        <div class="section" id="topic-6">
+            <h2>6️⃣ Edge Case Handling</h2>
             <div class="explanation">
-                <strong>Core Idea:</strong> Production prompts must handle bad inputs gracefully.
+                <strong>Core Idea:</strong> Engineering for <strong>Non-Happy Paths</strong>. Robust prompts anticipate
+                malformed data, empty inputs, and "Out-of-Distribution" queries to ensure the system fails safely and
+                gracefully.
             </div>
             <div class="example-box">
                 <h4>🛑 The "I Don't Know" Training</h4>
